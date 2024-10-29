@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="./source/css/style.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>To Do List</title>
+</head>
+<body class="bg-zinc-950">
+    <div class="container mx-auto min-h-screen ">
+        <div class="w-5/6 mx-auto flex flex-col justify-center">
+            <div class="flex justify-between py-5">
+                <input type="search" class="w-1/4 px-4 py-3 rounded-lg bg-gray-500 text-white placeholder:text-gray-200" placeholder="Search">
+
+                <select class="w-1/6 px-4 py-3 rounded-lg bg-gray-500 text-white">
+                    <option value="">Sroty By</option>
+                    <option value="">sort by name</option>
+                    <option value="">sort by priority</option>
+                </select>
+            </div>
+            <div class="flex gap-x-3">
+                <!-- card to do -->
+                <div class="w-2/6 bg-gray-900 border border-gray-500 rounded-md">
+                    <div class="w-full border-b border-gray-500 bg-gray-800 p-3 rounded-md">
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 border-2 rounded-full border-indigo-600 mr-3"></div>
+                            <h1 class="text-white mr-4 font-semibold text-xl">To Do</h1>
+                            <span class="h-6 px-2 text-center bg-gray-900 rounded-full text-white">1</span>
+                        </div>
+                        <p class="text-gray-400 mt-2">This item hasn't been started</p>
+                    </div>
+    
+                    <div class="">
+                        <div class="w-11/12 bg-gray-700 mx-auto mt-3 rounded-md border-2 border-red-600">
+                            <div class="w-full bg-gray-800 p-2 rounded flex justify-between border-b-2 border-red-600">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-white mr-3"></div>
+                                    <p class="mr-3 text-white font-poppins">Mostafa Rhazlani</p>
+                                    <span class="h-6 px-1 text-center text-white rounded-full bg-red-600 mr-3">P1</span>
+                                </div>
+    
+                                <span class="text-white text-2xl">
+                                    <i class="fa-solid fa-ellipsis hover:scale-x-105 cursor-pointer"></i>
+                                </span>
+                            </div>
+    
+                            <div class="p-3">
+                                <h2 class="text-center text-lg font-semibold text-white mb-3">section-home</h2>
+    
+                                <div class="flex justify-around items-center">
+                                    <div class="text-center text-white">
+                                        <p>Mon, Oct 28</p>
+                                        <p>13:30 pm</p>
+                                    </div>
+                                    
+                                    <div class="w-20 h-1 bg-gray-300 rounded"></div>
+                                    
+                                    <div class="text-center text-white">
+                                        <p>Mon, Oct 28</p>
+                                        <p>13:30 pm</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full rounded-b-md h-14 p-4 text-gray-400 mt-5 hover:bg-gray-700 cursor-pointer">
+                        <p> <span><i class="fa-solid fa-plus"></i></span> Add item</p>
+                    </div>
+                </div>
+                <!-- end card to do -->
+    
+                <!-- card in progress -->
+                <div class="w-2/6 bg-gray-900 border border-gray-500 rounded-md">
+                    <div class="w-full border-b border-gray-500 bg-gray-800 p-3 rounded-md">
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 border-2 rounded-full border-yellow-500 mr-3"></div>
+                            <h1 class="text-white mr-4 font-semibold text-xl">In Progress</h1>
+                            <span class="h-6 px-2 text-center bg-gray-900 rounded-full text-white">1</span>
+                        </div>
+                        <p class="text-gray-400 mt-2">This is being worked on</p>
+                    </div>
+    
+                    <div class="">
+                        <div class="w-11/12 bg-gray-700 mx-auto mt-3 rounded-md border-2 border-orange-600">
+                            <div class="w-full bg-gray-800 p-2 rounded flex justify-between border-b-2 border-orange-600">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-white mr-3"></div>
+                                    <p class="mr-3 text-white">Mostafa Rhazlani</p>
+                                    <span class="h-6 px-1 text-center text-white rounded-full bg-orange-600 mr-3">P2</span>
+                                </div>
+    
+                                <span class="text-white text-2xl">
+                                    <i class="fa-solid fa-ellipsis hover:scale-x-105 cursor-pointer"></i>
+                                </span>
+                            </div>
+    
+                            <div class="p-3">
+                                <h2 class="text-center text-lg font-semibold text-white mb-3">section-home</h2>
+    
+                                <div class="flex justify-around items-center">
+                                    <div class="text-center text-white">
+                                        <p>Mon, Oct 28</p>
+                                        <p>13:30 pm</p>
+                                    </div>
+                                    
+                                    <div class="w-20 h-1 bg-gray-300 rounded"></div>
+                                    
+                                    <div class="text-center text-white">
+                                        <p>Mon, Oct 28</p>
+                                        <p>13:30 pm</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full rounded-b-md h-14 p-4 text-gray-400 mt-5 hover:bg-gray-700 cursor-pointer">
+                        <p> <span><i class="fa-solid fa-plus"></i></span> Add item</p>
+                    </div>
+                </div>
+                <!-- end card in progress -->
+    
+                <!-- card done -->
+                <div class="w-2/6 bg-gray-900 border border-gray-500 rounded-md">
+                    <div class="w-full border-b border-gray-500 bg-gray-800 p-3 rounded-md">
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 border-2 rounded-full border-purple-800 mr-3"></div>
+                            <h1 class="text-white mr-4 font-semibold text-xl">Done</h1>
+                            <span class="h-6 px-2 text-center bg-gray-900 rounded-full text-white">1</span>
+                        </div>
+                        <p class="text-gray-400 mt-2">This has been completed</p>
+                    </div>
+    
+                    <div class="">
+                        <div class="w-11/12 bg-gray-700 mx-auto mt-3 rounded-md border-2 border-green-600">
+                            <div class="w-full bg-gray-800 p-2 rounded flex justify-between border-b-2 border-green-600">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-white mr-3"></div>
+                                    <p class="mr-3 text-white">Mostafa Rhazlani</p>
+                                    <span class="h-6 px-1 text-center text-white rounded-full bg-green-600 mr-3">P3</span>
+                                </div>
+    
+                                <span class="text-white text-2xl">
+                                    <i class="fa-solid fa-ellipsis hover:scale-x-105 cursor-pointer"></i>
+                                </span>
+                            </div>
+    
+                            <div class="p-3">
+                                <h2 class="text-center text-lg font-semibold text-white mb-3">section-home</h2>
+    
+                                <div class="flex justify-around items-center">
+                                    <div class="text-center text-white">
+                                        <p>Mon, Oct 28</p>
+                                        <p>13:30 pm</p>
+                                    </div>
+                                    
+                                    <div class="w-20 h-1 bg-gray-300 rounded"></div>
+                                    
+                                    <div class="text-center text-white">
+                                        <p>Mon, Oct 28</p>
+                                        <p>13:30 pm</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full rounded-b-md h-14 p-4 text-gray-400 mt-5 hover:bg-gray-700 cursor-pointer">
+                        <p> <span><i class="fa-solid fa-plus"></i></span> Add item</p>
+                    </div>
+                </div>
+                <!-- end card done -->
+            </div>
+        </div>
+        <!-- <div class="w-1/2 mx-auto h-screen z-10">
+            <div class="mt-10 bg-gray-700 shadow-black p-5 rounded-lg ">
+                <h2 class="text-center text-2xl font-bold text-white">Add Task</h2>
+                <form action="" class="flex flex-col">
+                    <label class="text-white mb-1" for="">Title Of Task</label>
+                    <input class="px-4 py-3 rounded-lg mb-4" type="text" placeholder="Enter title of task">
+    
+                    <label class="text-white mb-1" for="">Start Date Of Task</label>
+                    <input class="px-4 py-3 rounded-lg mb-4" type="datetime-local">
+    
+                    <label class="text-white mb-1" for="">End Date Of Task</label>
+                    <input class="px-4 py-3 rounded-lg mb-4" type="datetime-local">
+    
+                    <label class="text-white mb-1" for="">Select Priority Of Task</label>
+                    <select class="px-4 py-3 rounded-lg mb-4">
+                        <optgroup label="Priority">
+                            <option value="">P1</option>
+                            <option value="">P2</option>
+                            <option value="">P3</option>
+                        </optgroup>
+                    </select>
+    
+                    <input id="submit" type="submit" value="Add" class="text-white w-2/5 bg-gray-400 py-3 rounded-lg hover:bg-gray-300 cursor-pointer">
+                </form>
+            </div>
+        </div> -->
+    </div>
+
+    <script src="./source/js/app.js"></script>
+</body>
+</html>
+
