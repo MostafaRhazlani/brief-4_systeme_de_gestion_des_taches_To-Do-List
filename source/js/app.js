@@ -159,7 +159,7 @@ columnBoard.forEach(itemBoard => {
                 <div class="w-11/12 mx-auto overflow-auto hideScroll">
                     ${htmlTask}
                 </div>
-                <div class="bg-gray-900 w-full rounded-b-md p-4 text-gray-400 hover:bg-gray-700 cursor-pointer">
+                <div id="displyForm" class="bg-gray-900 w-full rounded-b-md p-4 text-gray-400 hover:bg-gray-700 cursor-pointer">
                     <p> <span><i class="fa-solid fa-plus"></i></span> Add item</p>
                 </div>
             </div>
@@ -169,6 +169,29 @@ columnBoard.forEach(itemBoard => {
 });
 
 board.innerHTML = htmlBoard;
+
+
+// event display and close form add item
+const form = document.querySelector("#formAddItem");
+const displyForm = document.querySelectorAll('#displyForm');
+const closeForm = document.querySelector('#closeForm');
+
+// event display form
+displyForm.forEach(btn => {
+    btn.addEventListener('click', () => {
+        form.classList.add('flex')
+        
+        form.classList.remove('hidden')
+    })
+})
+
+// event close form
+closeForm.addEventListener('click', (e) => {
+    e.preventDefault();
+    form.classList.add('hidden');
+    form.classList.remove('flex')
+})
+
 
     
 
