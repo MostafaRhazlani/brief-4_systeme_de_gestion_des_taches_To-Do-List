@@ -102,7 +102,7 @@ columnBoard.forEach(itemBoard => {
     const changeColorBorder = itemBoard.columnId == 1 ? 'border-indigo-600' : itemBoard.columnId == 2 ? 'border-yellow-500' : 'border-purple-800';
     
     // loop for display tasks
-    const htmlTask = Array.isArray(itemBoard.tasks) ? itemBoard.tasks.map(task => {
+    const htmlTask = itemBoard.tasks ? itemBoard.tasks.map(task => {
         
         const changeBgColorPriority = task.priority == 'P1' ? 'bg-red-600' : task.priority == 'P2' ? 'bg-orange-600' : 'bg-green-600';
         
@@ -141,7 +141,7 @@ columnBoard.forEach(itemBoard => {
 
     `}) : ''
 
-    let totalTasks = Array.isArray(itemBoard.tasks) ? itemBoard.tasks.length : 0;
+    let totalTasks = itemBoard.tasks ? itemBoard.tasks.length : 0;
 
     htmlBoard += `
         <div class="w-2/6 bg-gray-900 border border-gray-500 rounded-md max-h-full flex flex-col justify-between">
