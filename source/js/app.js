@@ -140,7 +140,7 @@ columnBoard.forEach(itemBoard => {
         </div>
         
 
-    `}) : ''
+    `}).join('') : ''
 
     let totalTasks = itemBoard.tasks ? itemBoard.tasks.length : 0;
 
