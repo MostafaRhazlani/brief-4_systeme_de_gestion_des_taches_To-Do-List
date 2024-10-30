@@ -104,15 +104,16 @@ columnBoard.forEach(itemBoard => {
     // loop for display tasks
     const htmlTask = itemBoard.tasks ? itemBoard.tasks.map(task => {
         
-        const changeBgColorPriority = task.priority == 'P1' ? 'bg-red-600' : task.priority == 'P2' ? 'bg-orange-600' : 'bg-green-600';
+        const changeBgColorPriority = task.priority == 'P1' ? 'bg-red-400 border-2 border-red-600' : task.priority == 'P2' ? 'bg-orange-400 border-2 border-orange-600' : 'bg-green-400 border-2 border-green-600';
+
         
         return `
-        <div class="bg-gray-700 rounded-md mt-3 border-2 border-red-600">
-            <div class="w-full bg-gray-800 p-2 rounded flex justify-between border-b-2 border-red-600">
+        <div class="bg-gray-700 rounded-md mt-3 border border-gray-600">
+            <div class="w-full bg-gray-800 p-2 rounded flex justify-between border-b border-gray-600">
                 <div class="flex items-center">
                     <div class="w-8 h-8 rounded-full bg-white mr-3"></div>
                     <p class="mr-3 text-white font-poppins">${task.ownerTask}</p>
-                    <span class="h-6 px-1 text-center text-white rounded-full ${changeBgColorPriority} mr-3">${task.priority}</span>
+                    <span class="px-2 text-sm font-medium text-center text-white rounded-full  ${changeBgColorPriority} mr-3">${task.priority}</span>
                 </div>
 
                 <span class="text-white text-2xl">
