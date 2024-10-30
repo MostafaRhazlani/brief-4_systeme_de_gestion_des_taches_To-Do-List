@@ -141,13 +141,15 @@ columnBoard.forEach(itemBoard => {
 
     `}) : ''
 
+    let totalTasks = Array.isArray(itemBoard.tasks) ? itemBoard.tasks.length : 0;
+
     htmlBoard += `
         <div class="w-2/6 bg-gray-900 border border-gray-500 rounded-md max-h-full flex flex-col justify-between">
             <div class="w-full border-b border-gray-500 bg-gray-800 p-3 rounded-md">
                 <div class="flex items-center">
                     <div class="w-6 h-6 border-2 rounded-full ${changeColorBorder} mr-3"></div>
                     <h1 class="text-white mr-4 font-semibold text-xl">${itemBoard.nameColumn}</h1>
-                    <span class="h-6 px-2 text-center bg-gray-900 rounded-full text-white">10</span>
+                    <span class="h-6 px-2 text-center bg-gray-900 rounded-full text-white">${totalTasks}</span>
                 </div>
                 <p class="text-gray-400 mt-2">${itemBoard.des}</p>
             </div>
