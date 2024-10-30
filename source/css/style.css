@@ -3,3 +3,7 @@
 body {
     font-family: 'poppins';
 }
+
+.hideScroll::-webkit-scrollbar {
+    display: none;
+}
