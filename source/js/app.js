@@ -106,14 +106,14 @@ function refreshBoard() {
                                     <div class="flex justify-around items-center">
                                         <div class="text-center text-white">
                                             <p>${task.stratDate}</p>
-                                            <p>13:30 pm</p>
+                                            <p>${task.startTime}</p>
                                         </div>
                                         
                                         <div class="w-20 h-1 bg-gray-300 rounded"></div>
                                         
                                         <div class="text-center text-white">
                                             <p>${task.endDate}</p>
-                                            <p>13:30 pm</p>
+                                            <p>${task.endTime}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -146,22 +146,37 @@ function refreshBoard() {
 
 refreshBoard();
 
-
 // event display and close form add item
 const form = document.querySelector("#formAddItem");
 const contentForm = `
     <div class="w-1/2 mx-auto">
         <div class="mt-10 bg-gray-700 shadow-black p-5 rounded-lg ">
-            <h2 class="text-center text-2xl font-bold text-white">Add Task</h2>
+            <h2 class="text-center text-3xl mt-3 mb-7 font-bold text-white">Add Task</h2>
             <form action="" method="get" class="flex flex-col">
                 <label class="text-white mb-1" for="">Title Of Task</label>
-                <input class="title px-4 py-3 rounded-lg mb-4" type="text" placeholder="Enter title of task">
+                <input class="title px-4 py-3 rounded-lg mb-7" type="text" placeholder="Enter title of task">
                 
-                <label class="text-white mb-1" for="">Start Date Of Task</label>
-                <input class="startDate px-4 py-3 rounded-lg mb-4" type="datetime-local">
+                <div class="flex gap-4 mb-7">
+                    <div class="w-2/4">
+                        <label class="text-white mb-1" for="">Start Date Of Task</label>
+                        <input class="startDate px-4 py-3 w-full rounded-lg" type="date">
+                    </div>                    
+                    <div class="w-2/4">
+                        <label class="text-white mb-1" for="">Start Time Of Task</label>
+                        <input class="startTime px-4 py-3 w-full rounded-lg" type="time">
+                    </div>
+                </div>
                 
-                <label class="text-white mb-1" for="">End Date Of Task</label>
-                <input class="endDate px-4 py-3 rounded-lg mb-4" type="datetime-local">
+                 <div class="flex gap-4 mb-7">
+                    <div class="w-2/4">
+                        <label class="text-white mb-1" for="">End Date Of Task</label>
+                        <input class="endDate px-4 py-3 w-full rounded-lg" type="date">
+                    </div>                    
+                    <div class="w-2/4">
+                        <label class="text-white mb-1" for="">End Time Of Task</label>
+                        <input class="endTime px-4 py-3 w-full rounded-lg" type="time">
+                    </div>
+                </div>
 
                 <label class="text-white mb-1" for="">Select Priority Of Task</label>
                 <select class="priority px-4 py-3 rounded-lg mb-4">
@@ -192,14 +207,18 @@ submit.addEventListener('click', (e) => {
     
     const title = document.querySelector('.title');
     const startDate = document.querySelector('.startDate');
+    const startTime = document.querySelector('.startTime');
     const endDate = document.querySelector('.endDate');
+    const endTime = document.querySelector('.endTime');
     const priority = document.querySelector('.priority');
 
     let taskObject = {
         'taskId':  index++,
         'taskName' : title.value,
         'stratDate': startDate.value,
+        'startTime': startTime.value,
         'endDate': endDate.value,
+        'endTime': endTime.value,
         'status': submit.dataset.id,
         'priority': priority.value
     }
