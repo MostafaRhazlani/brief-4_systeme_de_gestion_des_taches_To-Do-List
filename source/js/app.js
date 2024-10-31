@@ -92,7 +92,7 @@ function refreshBoard() {
                                 <div class="w-full bg-gray-800 p-2 rounded flex justify-between border-b border-gray-600">
                                     <div class="flex items-center">
                                         <div class="w-8 h-8 rounded-full bg-white mr-3"></div>
-                                        <p class="mr-3 text-white font-poppins">m</p>
+                                        <p class="mr-3 text-white font-poppins">Mostafa</p>
                                         <span class="px-2 text-sm font-medium text-center text-white rounded-full ${findObject(priorities, task.priority).name == 'P1' ? 'bg-red-500 border-2 border-red-700' : findObject(priorities, task.priority).name  == 'P2' ? 'bg-orange-500 border-2 border-orange-700' : 'bg-green-500 border-2 border-green-700'} mr-3">${findObject(priorities, task.priority).name }</span>
                                     </div>
                     
@@ -131,11 +131,14 @@ function refreshBoard() {
     board.innerHTML = htmlBoard;
     const displyForm = document.querySelectorAll('#displyForm');
     // event display form
-    displyForm.forEach(btn => {
+    displyForm.forEach((btn, columnId) => {
         btn.addEventListener('click', () => {
             form.classList.add('flex')
             form.classList.remove('hidden')
+            submit.dataset.id = columnId + 1;
 
+            console.log(submit.dataset);
+            
             blurContainer.classList.add('blur-lg');
         })
     })
@@ -159,15 +162,6 @@ const contentForm = `
                 
                 <label class="text-white mb-1" for="">End Date Of Task</label>
                 <input class="endDate px-4 py-3 rounded-lg mb-4" type="datetime-local">
-                
-                <label class="text-white mb-1" for="">Status</label>
-                <select class="status px-4 py-3 rounded-lg mb-4">
-                    <optgroup label="Status">
-                        <option value="1">To Do</option>
-                        <option value="2">In Progress</option>
-                        <option value="3">Done</option>
-                    </optgroup>
-                </select>
 
                 <label class="text-white mb-1" for="">Select Priority Of Task</label>
                 <select class="priority px-4 py-3 rounded-lg mb-4">
@@ -180,13 +174,52 @@ const contentForm = `
                 
                 <div class="flex justify-between mt-5">
                 <button id="closeForm" class="text-white w-1/5 bg-gray-600 py-3 rounded-lg duration-500 hover:bg-gray-500 cursor-pointer hover:duration-500 hover:scale-[1.06]">Cancel</button>
-                    <input type="submit" value="Add" class="text-white w-1/5 bg-gray-500 py-3 rounded-lg duration-500 hover:bg-gray-400 cursor-pointer hover:duration-500 hover:scale-[1.06]">
+                    <input id="submit" type="submit" value="Add" class="text-white w-1/5 bg-gray-500 py-3 rounded-lg duration-500 hover:bg-gray-400 cursor-pointer hover:duration-500 hover:scale-[1.06]"">
                 </div>
             </form>
         </div>
     </div>`;
 
 form.innerHTML = contentForm;
+
+const submit = document.querySelector('#submit');
+let index = 1
+
+submit.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    console.log(submit.dataset.id);
+    
+    const title = document.querySelector('.title');
+    const startDate = document.querySelector('.startDate');
+    const endDate = document.querySelector('.endDate');
+    const priority = document.querySelector('.priority');
+
+    let taskObject = {
+        'taskId':  index++,
+        'taskName' : title.value,
+        'stratDate': startDate.value,
+        'endDate': endDate.value,
+        'status': submit.dataset.id,
+        'priority': priority.value
+    }
+
+    tasks.push(taskObject);
+
+    console.log(tasks);
+    
+    refreshBoard();
+
+    // reset data
+    title.value = '';
+    startDate.value = '';
+    endDate.value = '';
+    priority.value = '1';
+
+    form.classList.add('hidden');
+    form.classList.remove('flex')
+    blurContainer.classList.remove('blur-lg');
+})
 
 const closeForm = document.querySelector('#closeForm');
 // event close form
