@@ -136,8 +136,6 @@ function refreshBoard() {
             form.classList.add('flex')
             form.classList.remove('hidden')
             submit.dataset.id = columnId + 1;
-
-            console.log(submit.dataset);
             
             blurContainer.classList.add('blur-lg');
         })
@@ -202,8 +200,6 @@ let index = 1
 
 submit.addEventListener('click', (e) => {
     e.preventDefault();
-
-    console.log(submit.dataset.id);
     
     const title = document.querySelector('.title');
     const startDate = document.querySelector('.startDate');
@@ -211,6 +207,8 @@ submit.addEventListener('click', (e) => {
     const endDate = document.querySelector('.endDate');
     const endTime = document.querySelector('.endTime');
     const priority = document.querySelector('.priority');
+
+
 
     let taskObject = {
         'taskId':  index++,
@@ -224,8 +222,6 @@ submit.addEventListener('click', (e) => {
     }
 
     tasks.push(taskObject);
-
-    console.log(tasks);
     
     refreshBoard();
 
