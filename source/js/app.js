@@ -75,6 +75,8 @@ function refreshBoard() {
     
         let taskOfBoard = tasks.filter(task => task.status == itemBoard.columnId)
         
+        console.log(taskOfBoard.length);
+        
         htmlBoard += `
             <div class="w-2/6 bg-gray-900 border border-gray-500 rounded-md max-h-full flex flex-col justify-between">
                 <div class="w-full border-b border-gray-500 bg-gray-800 p-3 rounded-md">
@@ -86,8 +88,8 @@ function refreshBoard() {
                     <p class="text-gray-400 mt-2">${itemBoard.des}</p>
                 </div>
                 <div class="h-5/6 flex flex-col justify-between">
-                    <div class="w-11/12 mx-auto overflow-auto hideScroll">
-                        ${taskOfBoard.map(task =>
+                    <div class="w-11/12 h-[350px] mx-auto overflow-auto hideScroll">
+                        ${taskOfBoard.length != 0 ? taskOfBoard.map(task =>
                             `<div class="bg-gray-700 rounded-md mt-3 border border-gray-600">
                                 <div class="w-full bg-gray-800 p-2 rounded flex justify-between border-b border-gray-600">
                                     <div class="flex items-center">
@@ -118,7 +120,7 @@ function refreshBoard() {
                                     </div>
                                 </div>
                             </div>`
-                        ).join('') }
+                        ).join('') : `<p class="text-white p-3 text-center">Tasks Not Found</p>` }
                     </div>
                     <div id="displyForm" class="bg-gray-900 w-full rounded-b-md p-4 text-gray-400 hover:bg-gray-700 cursor-pointer">
                         <p> <span><i class="fa-solid fa-plus"></i></span> Add item</p>
