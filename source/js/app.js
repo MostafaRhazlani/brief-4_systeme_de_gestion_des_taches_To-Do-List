@@ -136,6 +136,9 @@ function refreshBoard() {
             form.classList.add('flex')
             form.classList.remove('hidden')
             submit.dataset.id = columnId + 1;
+
+            console.log(submit.dataset.id);
+            
             
             blurContainer.classList.add('blur-lg');
         })
@@ -152,27 +155,32 @@ const contentForm = `
             <h2 class="text-center text-3xl mt-3 mb-7 font-bold text-white">Add Task</h2>
             <form action="" method="get" class="flex flex-col">
                 <label class="text-white mb-1" for="">Title Of Task</label>
-                <input class="title px-4 py-3 rounded-lg mb-7" type="text" placeholder="Enter title of task">
+                <input class="title px-4 py-3 rounded-lg " type="text" placeholder="Enter title of task">
+                <p class="validateTitle text-sm p-2 h-9 text-red-400 mb-1"></p>
                 
-                <div class="flex gap-4 mb-7">
+                <div class="flex gap-4">
                     <div class="w-2/4">
                         <label class="text-white mb-1" for="">Start Date Of Task</label>
                         <input class="startDate px-4 py-3 w-full rounded-lg" type="date">
+                        <p class="validateStDate text-sm p-2 h-9 text-red-400 mb-1"></p>
                     </div>                    
                     <div class="w-2/4">
                         <label class="text-white mb-1" for="">Start Time Of Task</label>
                         <input class="startTime px-4 py-3 w-full rounded-lg" type="time">
+                        <p class="validateStTime text-sm p-2 h-9 text-red-400 mb-1"></p>
                     </div>
                 </div>
                 
-                 <div class="flex gap-4 mb-7">
+                <div class="flex gap-4">
                     <div class="w-2/4">
                         <label class="text-white mb-1" for="">End Date Of Task</label>
                         <input class="endDate px-4 py-3 w-full rounded-lg" type="date">
+                        <p class="validateEnDate text-sm p-2 h-9 text-red-400 mb-1"></p>
                     </div>                    
                     <div class="w-2/4">
                         <label class="text-white mb-1" for="">End Time Of Task</label>
                         <input class="endTime px-4 py-3 w-full rounded-lg" type="time">
+                        <p class="validateEnTime text-sm p-2 h-9 text-red-400 mb-1"></p>
                     </div>
                 </div>
 
@@ -195,20 +203,73 @@ const contentForm = `
 
 form.innerHTML = contentForm;
 
+// elements of message for validation
 const submit = document.querySelector('#submit');
+const validateTitle = document.querySelector('.validateTitle');
+const validateStDate = document.querySelector('.validateStDate');
+const validateStTime = document.querySelector('.validateStTime');
+const validateEnDate = document.querySelector('.validateEnDate');
+const validateEnTime = document.querySelector('.validateEnTime');
+
+// elements of inputs
+const title = document.querySelector('.title');
+const startDate = document.querySelector('.startDate');
+const startTime = document.querySelector('.startTime');
+const endDate = document.querySelector('.endDate');
+const endTime = document.querySelector('.endTime');
+const priority = document.querySelector('.priority');
+
 let index = 1
 
 submit.addEventListener('click', (e) => {
     e.preventDefault();
-    
-    const title = document.querySelector('.title');
-    const startDate = document.querySelector('.startDate');
-    const startTime = document.querySelector('.startTime');
-    const endDate = document.querySelector('.endDate');
-    const endTime = document.querySelector('.endTime');
-    const priority = document.querySelector('.priority');
 
+    validateTitle.innerText = '';
+    validateStDate.innerText = '';
+    validateStTime.innerText = '';
+    validateEnDate.innerText = '';
+    validateEnTime.innerText = '';
 
+    if (!title.value) {
+        validateTitle.innerText = 'This field is required!';
+        return;
+    } else if (title.value.length > 25) {
+        validateTitle.innerText = 'Title is Too Long';
+        return;
+    }
+
+    if (!startDate.value) {
+        validateStDate.innerText = 'This field is required!';
+        return;
+    }
+
+    if (!startTime.value) {
+        validateStTime.innerText = 'This field is required!';
+        return;
+    }
+
+    if (!endDate.value) {
+        validateEnDate.innerText = 'This field is required!';
+        return;
+    }
+
+    if (!endTime.value) {
+        validateEnTime.innerText = 'This field is required!';
+        return;
+    }
+
+    const startDateTime = new Date(`${startDate.value}T${startTime.value}`);
+    const endDateTime = new Date(`${endDate.value}T${endTime.value}`);
+
+    if (endDateTime < startDateTime) {
+        validateEnDate.innerText = 'Start Date And Time Must Be After End Date And Time';
+        return;
+    }
+
+    if (priority.value === '') {
+        validateTitle.innerText = 'Please select a priority!';
+        return;
+    }
 
     let taskObject = {
         'taskId':  index++,
@@ -219,8 +280,9 @@ submit.addEventListener('click', (e) => {
         'endTime': endTime.value,
         'status': submit.dataset.id,
         'priority': priority.value
-    }
+    }   
 
+    
     tasks.push(taskObject);
     
     refreshBoard();
@@ -228,7 +290,9 @@ submit.addEventListener('click', (e) => {
     // reset data
     title.value = '';
     startDate.value = '';
+    startTime.value = '';
     endDate.value = '';
+    endTime.value = ''
     priority.value = '1';
 
     form.classList.add('hidden');
@@ -243,6 +307,15 @@ closeForm.addEventListener('click', (e) => {
     form.classList.add('hidden');
     form.classList.remove('flex')
     blurContainer.classList.remove('blur-lg');
+
+
+    // reset data
+    title.value = '';
+    startDate.value = '';
+    startTime.value = '';
+    endDate.value = '';
+    endTime.value = ''
+    priority.value = '1';
 })
 
 
