@@ -75,8 +75,6 @@ function refreshBoard() {
     
         let taskOfBoard = tasks.filter(task => task.status == itemBoard.columnId)
         
-        console.log(taskOfBoard.length);
-        
         htmlBoard += `
             <div class="w-2/6 bg-gray-900 border border-gray-500 rounded-md max-h-full flex flex-col justify-between">
                 <div class="w-full border-b border-gray-500 bg-gray-800 p-3 rounded-md">
