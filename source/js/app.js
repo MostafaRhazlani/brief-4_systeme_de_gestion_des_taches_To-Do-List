@@ -391,7 +391,7 @@ submit.addEventListener('click', (e) => {
     }
 
     let taskObject = {
-        'taskId':  index++,
+        'id':  index++,
         'taskName' : title.value,
         'stratDate': startDate.value,
         'startTime': startTime.value,
