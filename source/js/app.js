@@ -21,12 +21,34 @@ let columnBoard = [
 let tasks = [
     {
         'taskId':  1,
-        'taskName' : 'section home',
-        'stratDate': '2024/02/03',
-        'startTime': '14:40',
-        'endDate': '2024/02/03',
-        'endTime': '14:40',
+        'taskName' : 'rrrrrrrrrr',
+        'stratDate': '48484848',
+        'startTime': '48448',
+        'endDate': '8885251',
+        'endTime': '8788454',
         'status': 1,
+        'priority': 1
+    },
+
+    {
+        'taskId':  2,
+        'taskName' : 'rrrrrrrrrr',
+        'stratDate': '48484848',
+        'startTime': '48448',
+        'endDate': '8885251',
+        'endTime': '8788454',
+        'status': 1,
+        'priority': 1
+    },
+
+    {
+        'taskId':  2,
+        'taskName' : 'rrrrrrrrrr',
+        'stratDate': '48484848',
+        'startTime': '48448',
+        'endDate': '8885251',
+        'endTime': '8788454',
+        'status': 2,
         'priority': 1
     }
 ]
@@ -100,32 +122,32 @@ function refreshBoard() {
                     <div class="w-11/12 h-[350px] mx-auto overflow-auto hideScroll">
                         ${taskOfBoard.length != 0 ? taskOfBoard.map(task =>
                             `<div class="bg-gray-700 rounded-md mt-3 border border-gray-600">
-                                <div class="w-full bg-gray-800 p-2 rounded flex justify-between border-b border-gray-600 relative">
+                                <div class="parent w-full bg-gray-800 p-2 rounded flex justify-between border-b border-gray-600 relative">
                                     <div class="flex items-center">
                                         <div class="w-8 h-8 rounded-full bg-white mr-3"></div>
                                         <p class="mr-3 text-white font-poppins">Mostafa</p>
                                         <span class="px-2 text-sm font-medium text-center text-white rounded-full ${findObject(priorities, task.priority).name == 'P1' ? 'bg-red-500 border-2 border-red-700' : findObject(priorities, task.priority).name  == 'P2' ? 'bg-orange-500 border-2 border-orange-700' : 'bg-green-500 border-2 border-green-700'} mr-3">${findObject(priorities, task.priority).name }</span>
                                     </div>
-
-                                    <span id="menu" class="text-white text-2xl">
+                                    
+                                    <span class="menu text-white text-2xl">
                                         <i class="fa-solid fa-ellipsis hover:scale-x-105 cursor-pointer"></i>
                                     </span>
 
-                                    <div class="options bg-slate-900 w-48 p-1 rounded border border-gray-500 absolute top-8 right-1 hidden">
+                                    <div class="options bg-slate-900 w-48 p-1 rounded border border-gray-500 absolute top-8 right-1 z-10 hidden">
                                         <div id="moveTask" class="flex justify-between items-center w-full px-2 py-1 text-sm text-start font-light text-white hover:cursor-pointer hover:bg-gray-600 hover:bg-opacity-20 rounded">
                                             <button><i class="fa-solid fa-arrows-left-right"></i>&nbsp;&nbsp;Move To Column</button>
                                             <i class="fa-solid fa-chevron-right"></i>
                                         </div>
                                     </div>
-                                    <div id="showColumns" class="bg-slate-900 p-1 rounded border border-gray-500 absolute top-8 right-1 hidden">
+
+                                    <div id="columns" class="bg-slate-900 p-1 rounded border border-gray-500 absolute top-8 right-1 z-20 hidden">
                                         <p class="px-2 pb-3 pt-2 text-white text-sm">Select an Item</p>
                                         ${columnBoard.map((column) => `
-                                            <button class="flex flex-col justify-center w-full px-2 py-2 text-sm text-start font-light text-white hover:bg-gray-600 hover:bg-opacity-20 rounded">
-                                            <div class="flex">
-                                                <div class="w-4 h-4 border-2 rounded-full ${column.columnId == 1 ? 'border-blue-600' : column.columnId == 2 ? 'border-yellow-600' : 'border-purple-600'} mr-3"></div>
-                                                ${column.nameColumn} 
-                                            </div>
-                                                
+                                            <button type="submit" onclick="changeColumn(${column.columnId})" id="chooseOption" class="flex flex-col justify-center w-full px-2 py-2 text-sm text-start font-light text-white hover:bg-gray-600 hover:bg-opacity-20 rounded">
+                                                <div class="flex">
+                                                    <div class="w-4 h-4 border-2 rounded-full ${column.columnId == 1 ? 'border-blue-600' : column.columnId == 2 ? 'border-yellow-600' : 'border-purple-600'} mr-3"></div>
+                                                    ${column.nameColumn} 
+                                                </div>
                                                 <p class="text-gray-400 mt-1 text-[13px] ml-7">${column.des}</p>
                                             </button>`
                                         ).join('')}
@@ -168,35 +190,37 @@ function refreshBoard() {
             form.classList.add('flex')
             form.classList.remove('hidden')
             submit.dataset.id = columnId + 1;
-
-            console.log(submit.dataset.id);
-            
             
             blurContainer.classList.add('blur-lg');
         })
     })
 
-    const menu = document.querySelector('#menu');
-    const options = document.querySelector('.options');
+    const menus = document.querySelectorAll('.menu');
+    const options = document.querySelectorAll('.options')
+    
+    // show or hide option when click on button menu
+    menus.forEach((menu, index) => {
+        
+        menu.addEventListener('click', () => {
 
-    // event for show menu
-    menu.addEventListener('click', () => {
-        options.classList.toggle('hidden')
-        showColumns.classList.add('hidden')
-    })
+            const currentOption = options[index]
+            
+            // check if the current option is hidden
+            const isHidden = currentOption.classList.contains('hidden')
 
-    const moveTask = document.querySelector('#moveTask');
-    const showColumns = document.querySelector('#showColumns');
+            // hide other option
+            options.forEach(option => option.classList.add('hidden'))
 
-    // event for show options and move task to another column
-    moveTask.addEventListener('click', () => {
-        showColumns.classList.remove('hidden')
+            // show current option after check is hidden
+            if(isHidden) {
+                currentOption.classList.remove('hidden')
+            }
 
-        options.classList.add('hidden')
+        })
         
     })
-}
 
+}
 refreshBoard();
 
 // event display and close form add item
