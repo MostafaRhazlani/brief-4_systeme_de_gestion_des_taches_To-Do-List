@@ -14,14 +14,16 @@
 <body class="bg-zinc-950">
     <div class="container mx-auto min-h-screen relative">
         <div id="blur-container" class="w-5/6 mx-auto min-h-screen flex flex-col justify-center">
-            <div class="flex justify-between py-5">
+            <div class="flex justify-between items-end my-5">
                 <input type="search" class="w-1/4 px-4 py-3 rounded-lg bg-gray-500 text-white placeholder:text-gray-200" placeholder="Search">
 
-                <select class="w-1/6 px-4 py-3 rounded-lg bg-gray-500 text-white">
-                    <option value="">Sroty By</option>
-                    <option value="">sort by name</option>
-                    <option value="">sort by priority</option>
-                </select>
+                <div class="flex flex-col w-1/6">
+                    <label class="text-white ml-2" for="select">Sort By</label>
+                    <select id="select" class="select px-2 py-3 rounded-lg bg-gray-500 text-white">
+                        <option value="date">Date</option>
+                        <option value="priority">priority</option>
+                    </select>
+                </div>
             </div>
             <div id="board" class="flex gap-x-3 max-h-[500px]">
                

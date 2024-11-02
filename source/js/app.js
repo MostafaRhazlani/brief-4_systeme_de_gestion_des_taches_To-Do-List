@@ -22,18 +22,18 @@ let tasks = [
     {
         'id':  1,
         'taskName' : 'mostafa',
-        'stratDate': '48484848',
+        'startDate': '2',
         'startTime': '48448',
         'endDate': '8885251',
         'endTime': '8788454',
         'status': 1,
-        'priority': 1
+        'priority': 2
     },
 
     {
         'id':  2,
         'taskName' : 'othmane',
-        'stratDate': '48484848',
+        'startDate': '1',
         'startTime': '48448',
         'endDate': '8885251',
         'endTime': '8788454',
@@ -44,12 +44,12 @@ let tasks = [
     {
         'id':  3,
         'taskName' : 'azdin',
-        'stratDate': '48484848',
+        'startDate': '10-02',
         'startTime': '48448',
         'endDate': '8885251',
         'endTime': '8788454',
         'status': 2,
-        'priority': 1
+        'priority': 3
     }
 ]
 
@@ -163,7 +163,7 @@ function refreshBoard() {
                     
                                     <div class="flex justify-around items-center">
                                         <div class="text-center text-white">
-                                            <p>${task.stratDate}</p>
+                                            <p>${task.startDate}</p>
                                             <p>${task.startTime}</p>
                                         </div>
                                         
@@ -414,7 +414,7 @@ submit.addEventListener('click', (e) => {
     let taskObject = {
         'id':  index++,
         'taskName' : title.value,
-        'stratDate': startDate.value,
+        'startDate': startDate.value,
         'startTime': startTime.value,
         'endDate': endDate.value,
         'endTime': endTime.value,
@@ -457,6 +457,26 @@ closeForm.addEventListener('click', (e) => {
     endTime.value = ''
     priority.value = '1';
 })
+
+const select = document.querySelector('.select');
+
+select.addEventListener('change', (event) => {
+    let value = event.target.value
+
+    if(value == 'date') {
+        // sort by date
+        tasks.sort((a,b) => a.startDate.localeCompare(b.startDate));
+        
+    } else {
+        // sort by priority
+        tasks.sort((a,b) => a.priority - b.priority);
+    }
+    refreshBoard();
+    
+})
+
+
+
 
 
     
