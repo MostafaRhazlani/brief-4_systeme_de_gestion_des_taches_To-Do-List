@@ -20,8 +20,8 @@ let columnBoard = [
 
 let tasks = [
     {
-        'taskId':  1,
-        'taskName' : 'rrrrrrrrrr',
+        'id':  1,
+        'taskName' : 'mostafa',
         'stratDate': '48484848',
         'startTime': '48448',
         'endDate': '8885251',
@@ -31,8 +31,8 @@ let tasks = [
     },
 
     {
-        'taskId':  2,
-        'taskName' : 'rrrrrrrrrr',
+        'id':  2,
+        'taskName' : 'othmane',
         'stratDate': '48484848',
         'startTime': '48448',
         'endDate': '8885251',
@@ -42,8 +42,8 @@ let tasks = [
     },
 
     {
-        'taskId':  2,
-        'taskName' : 'rrrrrrrrrr',
+        'id':  3,
+        'taskName' : 'azdin',
         'stratDate': '48484848',
         'startTime': '48448',
         'endDate': '8885251',
@@ -121,7 +121,7 @@ function refreshBoard() {
                 <div class="h-5/6 flex flex-col justify-between">
                     <div class="w-11/12 h-[350px] mx-auto overflow-auto hideScroll">
                         ${taskOfBoard.length != 0 ? taskOfBoard.map(task =>
-                            `<div class="bg-gray-700 rounded-md mt-3 border border-gray-600">
+                            `<div class="task bg-gray-700 rounded-md mt-3 border border-gray-600" data-task-id="${task.id}">
                                 <div class="parent w-full bg-gray-800 p-2 rounded flex justify-between border-b border-gray-600 relative">
                                     <div class="flex items-center">
                                         <div class="w-8 h-8 rounded-full bg-white mr-3"></div>
@@ -140,10 +140,10 @@ function refreshBoard() {
                                         </div>
                                     </div>
 
-                                    <div id="columns" class="bg-slate-900 p-1 rounded border border-gray-500 absolute top-8 right-1 z-20 hidden">
+                                    <div class="columns bg-slate-900 p-1 rounded border border-gray-500 absolute top-8 right-1 z-20 hidden">
                                         <p class="px-2 pb-3 pt-2 text-white text-sm">Select an Item</p>
                                         ${columnBoard.map((column) => `
-                                            <button type="submit" onclick="changeColumn(${column.columnId})" id="chooseOption" class="flex flex-col justify-center w-full px-2 py-2 text-sm text-start font-light text-white hover:bg-gray-600 hover:bg-opacity-20 rounded">
+                                            <button class="changeColumn flex flex-col justify-center w-full px-2 py-2 text-sm text-start font-light text-white hover:bg-gray-600 hover:bg-opacity-20 rounded" data-column-id="${column.columnId}">
                                                 <div class="flex">
                                                     <div class="w-4 h-4 border-2 rounded-full ${column.columnId == 1 ? 'border-blue-600' : column.columnId == 2 ? 'border-yellow-600' : 'border-purple-600'} mr-3"></div>
                                                     ${column.nameColumn} 
@@ -196,7 +196,8 @@ function refreshBoard() {
     })
 
     const menus = document.querySelectorAll('.menu');
-    const options = document.querySelectorAll('.options')
+    const options = document.querySelectorAll('.options');
+    const columns = document.querySelectorAll('.columns');
     
     // show or hide option when click on button menu
     menus.forEach((menu, index) => {
@@ -210,6 +211,7 @@ function refreshBoard() {
 
             // hide other option
             options.forEach(option => option.classList.add('hidden'))
+            columns.forEach(column => column.classList.add('hidden'))
 
             // show current option after check is hidden
             if(isHidden) {
@@ -217,9 +219,50 @@ function refreshBoard() {
             }
 
         })
-        
     })
 
+    // show or hide columns if click on button move to column
+    options.forEach((option, index) => {
+        option.addEventListener('click', () => {
+            
+            const currentColumn = columns[index]
+            
+            // check if the current column is hidden
+            const columnIsHidden = currentColumn.classList.contains('hidden');
+
+            // hide another columns in other cards
+            columns.forEach(column => column.classList.add('hidden'))
+
+            // show the current column after check is hidden
+            if(columnIsHidden) {
+                currentColumn.classList.remove('hidden')
+
+                let children = currentColumn.children;
+
+                // loop to get child of card columns
+               for(let child of children) {
+                    child.addEventListener('click', (event) => {
+                        
+                        // get id of itemBoard and id of task
+                        let columnId = parseInt(event.currentTarget.dataset.columnId)
+                        let taskId = event.currentTarget.closest('.task').dataset.taskId
+                        
+                        console.log('column id => ',columnId);
+                        
+                        console.log('task id => ',taskId);
+
+                        // check if status of task equal id of itemBoard
+                        if(findObject(tasks, taskId)) {
+
+                            findObject(tasks, taskId).status = columnId;
+                            refreshBoard();
+                        }
+                    })
+               }
+            }
+        })
+    })
+    
 }
 refreshBoard();
 
