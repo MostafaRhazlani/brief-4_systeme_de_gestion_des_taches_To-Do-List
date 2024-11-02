@@ -134,10 +134,14 @@ function refreshBoard() {
                                     </span>
 
                                     <div class="options bg-slate-900 w-48 p-1 rounded border border-gray-500 absolute top-8 right-1 z-10 hidden">
-                                        <div id="moveTask" class="flex justify-between items-center w-full px-2 py-1 text-sm text-start font-light text-white hover:cursor-pointer hover:bg-gray-600 hover:bg-opacity-20 rounded">
+                                        <div class="editTask flex justify-between items-center w-full px-2 py-1 text-sm text-start font-light text-white hover:cursor-pointer hover:bg-gray-600 hover:bg-opacity-20 rounded">
                                             <button><i class="fa-solid fa-arrows-left-right"></i>&nbsp;&nbsp;Move To Column</button>
                                             <i class="fa-solid fa-chevron-right"></i>
                                         </div>
+                                        <button class="deleteTask w-full px-2 py-1 text-sm text-start font-light text-red-500 hover:bg-red-500 hover:text-red-400 hover:bg-opacity-15 rounded">
+                                            <i class="fa-regular fa-trash-can"></i>&nbsp;&nbsp;
+                                            Delete Task
+                                        </button>
                                     </div>
 
                                     <div class="columns bg-slate-900 p-1 rounded border border-gray-500 absolute top-8 right-1 z-20 hidden">
@@ -198,6 +202,8 @@ function refreshBoard() {
     const menus = document.querySelectorAll('.menu');
     const options = document.querySelectorAll('.options');
     const columns = document.querySelectorAll('.columns');
+    const editTask = document.querySelectorAll('.editTask');
+    const deleteTask = document.querySelectorAll('.deleteTask');
     
     // show or hide option when click on button menu
     menus.forEach((menu, index) => {
@@ -217,13 +223,14 @@ function refreshBoard() {
             if(isHidden) {
                 currentOption.classList.remove('hidden')
             }
-
+            
         })
     })
 
+    
     // show or hide columns if click on button move to column
-    options.forEach((option, index) => {
-        option.addEventListener('click', () => {
+    editTask.forEach((edit, index) => {
+        edit.addEventListener('click', () => {
             
             const currentColumn = columns[index]
             
@@ -241,6 +248,8 @@ function refreshBoard() {
 
                 // loop to get child of card columns
                for(let child of children) {
+
+                    // edit status of task
                     child.addEventListener('click', (event) => {
                         
                         // get id of itemBoard and id of task
@@ -262,7 +271,19 @@ function refreshBoard() {
             }
         })
     })
-    
+
+    // delte task
+    deleteTask.forEach(remove => {
+        remove.addEventListener('click', (event) => {
+            let taskId = event.currentTarget.closest('.task').dataset.taskId
+
+            let removeTask = tasks.filter(task => task.id != taskId)
+
+            tasks = removeTask
+            refreshBoard();
+        })
+    })
+
 }
 refreshBoard();
 
@@ -338,7 +359,7 @@ const endDate = document.querySelector('.endDate');
 const endTime = document.querySelector('.endTime');
 const priority = document.querySelector('.priority');
 
-let index = 1
+let index = 4
 
 submit.addEventListener('click', (e) => {
     e.preventDefault();
@@ -391,7 +412,7 @@ submit.addEventListener('click', (e) => {
     }
 
     let taskObject = {
-        'taskId':  index++,
+        'id':  index++,
         'taskName' : title.value,
         'stratDate': startDate.value,
         'startTime': startTime.value,
