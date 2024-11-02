@@ -21,42 +21,46 @@ let columnBoard = [
 let tasks = [
     {
         'id':  1,
-        'taskName' : 'mostafa',
-        'startDate': '2',
-        'startTime': '48448',
-        'endDate': '8885251',
-        'endTime': '8788454',
+        'taskName' : 'section contact',
+        'startDate': 'Sun, Oct 24',
+        'startTime': '9:30',
+        'endDate': 'Tue, Oct 26',
+        'endTime': '9:30',
+        'ownerTask': 2,
         'status': 1,
         'priority': 2
     },
 
     {
         'id':  2,
-        'taskName' : 'othmane',
-        'startDate': '1',
-        'startTime': '48448',
-        'endDate': '8885251',
-        'endTime': '8788454',
-        'status': 1,
+        'taskName' : 'card team',
+        'startDate': 'Fri, Oct 27',
+        'startTime': '14:45',
+        'endDate': 'Tue, Nov 01',
+        'endTime': '10:00',
+        'ownerTask': 1,
+        'status': 2,
         'priority': 1
     },
 
     {
         'id':  3,
-        'taskName' : 'azdin',
-        'startDate': '10-02',
-        'startTime': '48448',
-        'endDate': '8885251',
-        'endTime': '8788454',
-        'status': 2,
+        'taskName' : 'section header',
+        'startDate': 'Sun, Oct 24',
+        'startTime': '9:30',
+        'endDate': 'Tue, Oct 26',
+        'endTime': '9:30',
+        'ownerTask': 3,
+        'status': 1,
         'priority': 3
-    }
+    },
 ]
 
 let users = [
     {
         'id': 1,
         'name': 'Mostafa Rhazlani',
+        'img': './source/img/photo youcode.jpg'
     },
 
     {
@@ -124,7 +128,7 @@ function refreshBoard() {
                             `<div class="task bg-gray-700 rounded-md mt-3 border border-gray-600" data-task-id="${task.id}">
                                 <div class="parent w-full bg-gray-800 p-2 rounded flex justify-between border-b border-gray-600 relative">
                                     <div class="flex items-center">
-                                        <img src="./source/img/photo youcode.jpg" alt="" class="border-2 border-zinc-400 w-8 h-8 rounded-full mr-3">
+                                        <img src="${findObject(users, task.ownerTask).img}" alt="" class="border-2 border-zinc-400 w-8 h-8 rounded-full mr-3">
                                         <p class="mr-3 text-white font-poppins">Mostafa</p>
                                         <span class="px-2 text-sm font-medium text-center text-white rounded-full ${findObject(priorities, task.priority).name == 'P1' ? 'bg-red-500 border-2 border-red-700' : findObject(priorities, task.priority).name  == 'P2' ? 'bg-orange-500 border-2 border-orange-700' : 'bg-green-500 border-2 border-green-700'} mr-3">${findObject(priorities, task.priority).name }</span>
                                     </div>
