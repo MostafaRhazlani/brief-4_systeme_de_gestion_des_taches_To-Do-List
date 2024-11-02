@@ -338,7 +338,7 @@ const endDate = document.querySelector('.endDate');
 const endTime = document.querySelector('.endTime');
 const priority = document.querySelector('.priority');
 
-let index = 1
+let index = 4
 
 submit.addEventListener('click', (e) => {
     e.preventDefault();
