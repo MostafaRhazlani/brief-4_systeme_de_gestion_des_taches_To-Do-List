@@ -123,9 +123,9 @@ function refreshBoard() {
                     <p class="text-gray-400 mt-2">${itemBoard.des}</p>
                 </div>
                 <div class="h-5/6 flex flex-col justify-between">
-                    <div class="w-11/12 h-[350px] pb-3 mx-auto overflow-auto hideScroll">
+                    <div class="w-11/12 h-[350px] mx-auto overflow-auto hideScroll">
                         ${taskOfBoard.length != 0 ? taskOfBoard.map(task =>
-                            `<div class="task bg-gray-700 rounded-md mt-3 border border-gray-600" data-task-id="${task.id}">
+                            `<div class="task bg-gray-700 rounded-md mt-2 border border-gray-600" data-task-id="${task.id}">
                                 <div class="parent w-full bg-gray-800 p-2 rounded flex justify-between border-b border-gray-600 relative">
                                     <div class="flex items-center">
                                         <img src="${findObject(users, task.ownerTask).img}" alt="" class="border-2 border-zinc-400 w-8 h-8 rounded-full mr-3">
@@ -182,7 +182,7 @@ function refreshBoard() {
                             </div>`
                         ).join('') : `<p class="text-white p-3 text-center">Tasks Not Found</p>` }
                     </div>
-                    <div id="displyForm" class="bg-gray-900 w-full rounded-b-md p-4 text-gray-400 hover:bg-gray-700 cursor-pointer">
+                    <div id="displyForm" class="bg-gray-900 w-full rounded-b-md p-4 mt-2 text-gray-400 hover:bg-gray-700 cursor-pointer">
                         <p> <span><i class="fa-solid fa-plus"></i></span> Add item</p>
                     </div>
                 </div>    
