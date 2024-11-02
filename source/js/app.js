@@ -138,6 +138,10 @@ function refreshBoard() {
                                             <button><i class="fa-solid fa-arrows-left-right"></i>&nbsp;&nbsp;Move To Column</button>
                                             <i class="fa-solid fa-chevron-right"></i>
                                         </div>
+                                        <button class="deleteTask w-full px-2 py-1 text-sm text-start font-light text-red-500 hover:bg-red-500 hover:text-red-400 hover:bg-opacity-15 rounded">
+                                            <i class="fa-regular fa-trash-can"></i>&nbsp;&nbsp;
+                                            Delete Task
+                                        </button>
                                     </div>
 
                                     <div class="columns bg-slate-900 p-1 rounded border border-gray-500 absolute top-8 right-1 z-20 hidden">
@@ -199,6 +203,7 @@ function refreshBoard() {
     const options = document.querySelectorAll('.options');
     const columns = document.querySelectorAll('.columns');
     const editTask = document.querySelectorAll('.editTask');
+    const deleteTask = document.querySelectorAll('.deleteTask');
     
     // show or hide option when click on button menu
     menus.forEach((menu, index) => {
@@ -218,7 +223,7 @@ function refreshBoard() {
             if(isHidden) {
                 currentOption.classList.remove('hidden')
             }
-
+            
         })
     })
 
@@ -264,6 +269,18 @@ function refreshBoard() {
                     })
                }
             }
+        })
+    })
+
+    // delte task
+    deleteTask.forEach(remove => {
+        remove.addEventListener('click', (event) => {
+            let taskId = event.currentTarget.closest('.task').dataset.taskId
+
+            let removeTask = tasks.filter(task => task.id != taskId)
+
+            tasks = removeTask
+            refreshBoard();
         })
     })
 
