@@ -119,7 +119,7 @@ function refreshBoard() {
                     <p class="text-gray-400 mt-2">${itemBoard.des}</p>
                 </div>
                 <div class="h-5/6 flex flex-col justify-between">
-                    <div class="w-11/12 h-[350px] mx-auto overflow-auto hideScroll">
+                    <div class="w-11/12 h-[350px] pb-3 mx-auto overflow-auto hideScroll">
                         ${taskOfBoard.length != 0 ? taskOfBoard.map(task =>
                             `<div class="task bg-gray-700 rounded-md mt-3 border border-gray-600" data-task-id="${task.id}">
                                 <div class="parent w-full bg-gray-800 p-2 rounded flex justify-between border-b border-gray-600 relative">
