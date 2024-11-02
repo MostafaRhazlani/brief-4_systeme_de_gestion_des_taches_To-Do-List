@@ -129,7 +129,7 @@ function refreshBoard() {
                                 <div class="parent w-full bg-gray-800 p-2 rounded flex justify-between border-b border-gray-600 relative">
                                     <div class="flex items-center">
                                         <img src="${findObject(users, task.ownerTask).img}" alt="" class="border-2 border-zinc-400 w-8 h-8 rounded-full mr-3">
-                                        <p class="mr-3 text-white font-poppins">Mostafa</p>
+                                        <p class="mr-3 text-white font-poppins">${findObject(users, task.ownerTask).name}</p>
                                         <span class="px-2 text-sm font-medium text-center text-white rounded-full ${findObject(priorities, task.priority).name == 'P1' ? 'bg-red-500 border-2 border-red-700' : findObject(priorities, task.priority).name  == 'P2' ? 'bg-orange-500 border-2 border-orange-700' : 'bg-green-500 border-2 border-green-700'} mr-3">${findObject(priorities, task.priority).name }</span>
                                     </div>
                                     
