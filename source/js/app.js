@@ -131,7 +131,7 @@ function refreshBoard() {
                     <div class="w-11/12 h-[350px] mx-auto overflow-auto hideScroll">
                         ${taskOfBoard.length != 0 ? taskOfBoard.map(task =>
                             `<div class="task bg-gray-700 rounded-md mt-2 border border-gray-600" data-task-id="${task.id}">
-                                <div class="parent w-full bg-gray-800 p-2 rounded flex justify-between border-b border-gray-600 relative">
+                                <div class="w-full bg-gray-800 p-2 rounded flex justify-between items-center border-b border-gray-600 relative">
                                     <div class="flex items-center">
                                         <img src="${findObject(users, task.ownerTask).img}" alt="" class="border-2 border-zinc-400 w-8 h-8 rounded-full mr-3">
                                         <p class="mr-3 text-white font-poppins">${findObject(users, task.ownerTask).name}</p>
