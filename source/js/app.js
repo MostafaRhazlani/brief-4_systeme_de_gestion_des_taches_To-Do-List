@@ -334,13 +334,15 @@ const contentForm = `
                 </div>
 
                 <label class="text-white mb-1" for="">Select Priority Of Task</label>
-                <select class="priority px-4 py-3 rounded-lg mb-4">
+                <select class="priority px-4 py-3 rounded-lg">
                     <optgroup label="Priority">
+                    <option value=""></option>
                     <option value="1">P1</option>
                     <option value="2">P2</option>
                     <option value="3">P3</option>
                     </optgroup>
                 </select>
+                <p class="validatePriority text-sm p-2 h-9 text-red-400 mb-1"></p>
                 
                 <div class="flex justify-between mt-5">
                 <button id="closeForm" class="text-white w-1/5 bg-gray-600 py-3 rounded-lg duration-500 hover:bg-gray-500 cursor-pointer hover:duration-500 hover:scale-[1.06]">Cancel</button>
@@ -360,6 +362,7 @@ const validateStDate = document.querySelector('.validateStDate');
 const validateStTime = document.querySelector('.validateStTime');
 const validateEnDate = document.querySelector('.validateEnDate');
 const validateEnTime = document.querySelector('.validateEnTime');
+const validatePriority = document.querySelector('.validatePriority');
 
 // elements of inputs
 const title = document.querySelector('.title');
@@ -381,6 +384,7 @@ submit.addEventListener('click', (e) => {
     validateStTime.innerText = '';
     validateEnDate.innerText = '';
     validateEnTime.innerText = '';
+    validatePriority.innerText = '';
 
     // validation for title if empty or characters more than 25
     if (!title.value) {
@@ -465,7 +469,7 @@ submit.addEventListener('click', (e) => {
     }
 
     if (priority.value === '') {
-        validateTitle.innerText = 'Please select a priority!';
+        validatePriority.innerText = 'Please select a priority!';
         return;
     }
 
