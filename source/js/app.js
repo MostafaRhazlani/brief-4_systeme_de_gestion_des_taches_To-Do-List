@@ -58,7 +58,7 @@ let priorities = [
 ]
 
 
-let localTasks = JSON.parse( localStorage.getItem('localTasks'))
+let localTasks = JSON.parse( localStorage.getItem('localTasks')) ?? []
 
 // function to find id include in array 
 const findObject = (array, id) => {
@@ -77,7 +77,7 @@ function refreshBoard() {
     columnBoard.forEach(itemBoard => {
 
         let changeColorBorderBoard = itemBoard.columnId == 1 ? 'border-blue-600' : itemBoard.columnId == 2 ? 'border-yellow-600' : 'border-purple-600'
-        localTasks = JSON.parse( localStorage.getItem('localTasks'))
+        localTasks = JSON.parse( localStorage.getItem('localTasks')) ?? []
 
         let taskOfBoard = localTasks.filter(task => task.status == itemBoard.columnId)
         
