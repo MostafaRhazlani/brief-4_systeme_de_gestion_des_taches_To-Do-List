@@ -265,10 +265,6 @@ function refreshBoard() {
                         // get id of itemBoard and id of task
                         let columnId = parseInt(event.currentTarget.dataset.columnId)
                         let taskId = event.currentTarget.closest('.task').dataset.taskId
-                        
-                        console.log('column id => ',columnId);
-                        
-                        console.log('task id => ',taskId);
 
                         // check if status of task equal id of itemBoard
                         if(findObject(tasks, taskId)) {
