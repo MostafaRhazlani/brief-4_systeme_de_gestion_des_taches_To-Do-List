@@ -8,11 +8,18 @@ body {
     display: none;
 }
 
+.select {
+    appearance: none;
+}
+
+select {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 640px) {
     .select {
         width: 200px;
         outline: none;
-        appearance: none;
     }
 
     .scroll-board {

@@ -18,46 +18,7 @@ let columnBoard = [
     },
 ]
 
-let tasks = [
-    {
-        'id':  1,
-        'taskName' : 'section contact',
-        'des': 'Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis! Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis!',
-        'startDate': 'Sun, Oct 24',
-        'startTime': '9:30',
-        'endDate': 'Tue, Oct 26',
-        'endTime': '9:30',
-        'ownerTask': 2,
-        'status': 1,
-        'priority': 2
-    },
-
-    {
-        'id':  2,
-        'taskName' : 'card team',
-        'startDate': 'Fri, Oct 27',
-        'des': 'Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis! Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis!',
-        'startTime': '14:45',
-        'endDate': 'Tue, Nov 01',
-        'endTime': '10:00',
-        'ownerTask': 1,
-        'status': 2,
-        'priority': 1
-    },
-
-    {
-        'id':  3,
-        'taskName' : 'section header',
-        'des': 'Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis! Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis!',
-        'startDate': 'Sun, Oct 24',
-        'startTime': '9:30',
-        'endDate': 'Tue, Oct 26',
-        'endTime': '9:30',
-        'ownerTask': 3,
-        'status': 1,
-        'priority': 1
-    },
-]
+let tasks = []
 
 let users = [
     {
@@ -96,9 +57,6 @@ let priorities = [
     },
 ]
 
-if (!localStorage.getItem('localTasks')) {
-    localStorage.setItem('localTasks', JSON.stringify(tasks))
-}
 
 let localTasks = JSON.parse( localStorage.getItem('localTasks'))
 
@@ -272,15 +230,13 @@ function refreshBoard() {
                         let columnId = parseInt(event.currentTarget.dataset.columnId)
                         let taskId = event.currentTarget.closest('.task').dataset.taskId
 
-                        console.log("localTasks ->",localTasks);
                         // check if status of task equal id of itemBoard
                         let updateStatus = localTasks
                         if(findObject(updateStatus, taskId)) {
-
+                            
                             
                             findObject(updateStatus, taskId).status = columnId;
                             
-                            console.log("updateStatus ->",updateStatus);
                             localStorage.setItem('localTasks', JSON.stringify(updateStatus))
 
                             refreshBoard();
@@ -400,7 +356,7 @@ const endDate = document.querySelector('.endDate');
 const endTime = document.querySelector('.endTime');
 const priority = document.querySelector('.priority');
 
-let index = 4
+let index = 1
 
 submit.addEventListener('click', (e) => {
     e.preventDefault();
@@ -570,7 +526,13 @@ select.addEventListener('change', (event) => {
     
 })
 
+const removeAll = document.querySelector('.removeAll');
 
+removeAll.addEventListener('click', () => {
+    localStorage.setItem('localTasks', JSON.stringify([]));
+    refreshBoard();
+    
+})
 
 
 
