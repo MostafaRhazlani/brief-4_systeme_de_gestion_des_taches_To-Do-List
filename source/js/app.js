@@ -96,6 +96,11 @@ let priorities = [
     },
 ]
 
+if (!localStorage.getItem('localTasks')) {
+    localStorage.setItem('localTasks', JSON.stringify(tasks))
+}
+
+let localTasks = JSON.parse( localStorage.getItem('localTasks'))
 
 // function to find id include in array 
 const findObject = (array, id) => {
@@ -114,8 +119,9 @@ function refreshBoard() {
     columnBoard.forEach(itemBoard => {
 
         let changeColorBorderBoard = itemBoard.columnId == 1 ? 'border-blue-600' : itemBoard.columnId == 2 ? 'border-yellow-600' : 'border-purple-600'
-    
-        let taskOfBoard = tasks.filter(task => task.status == itemBoard.columnId)
+        localTasks = JSON.parse( localStorage.getItem('localTasks'))
+
+        let taskOfBoard = localTasks.filter(task => task.status == itemBoard.columnId)
         
         htmlBoard += `
             <div class="column w-2/6 bg-gray-900 border border-gray-500 rounded-md max-h-full flex flex-col justify-between">
@@ -266,10 +272,17 @@ function refreshBoard() {
                         let columnId = parseInt(event.currentTarget.dataset.columnId)
                         let taskId = event.currentTarget.closest('.task').dataset.taskId
 
+                        console.log("localTasks ->",localTasks);
                         // check if status of task equal id of itemBoard
-                        if(findObject(tasks, taskId)) {
+                        let updateStatus = localTasks
+                        if(findObject(updateStatus, taskId)) {
 
-                            findObject(tasks, taskId).status = columnId;
+                            
+                            findObject(updateStatus, taskId).status = columnId;
+                            
+                            console.log("updateStatus ->",updateStatus);
+                            localStorage.setItem('localTasks', JSON.stringify(updateStatus))
+
                             refreshBoard();
                         }
                     })
@@ -283,9 +296,9 @@ function refreshBoard() {
         remove.addEventListener('click', (event) => {
             let taskId = event.currentTarget.closest('.task').dataset.taskId
 
-            let removeTask = tasks.filter(task => task.id != taskId)
+            let removeTask = localTasks.filter(task => task.id != taskId)
 
-            tasks = removeTask
+            localStorage.setItem("localTasks", JSON.stringify(removeTask))
             refreshBoard();
         })
     })
@@ -501,8 +514,10 @@ submit.addEventListener('click', (e) => {
     }   
 
     
-    tasks.push(taskObject);
+    let addNewTask = localTasks;
+    addNewTask.push(taskObject)
     
+    localStorage.setItem('localTasks', JSON.stringify(addNewTask))
     refreshBoard();
 
     // reset data
@@ -545,11 +560,11 @@ select.addEventListener('change', (event) => {
 
     if(value == 'date') {
         // sort by date
-        tasks.sort((a,b) => a.startDate.localeCompare(b.startDate));
+        localTasks.sort((a,b) => a.startDate.localeCompare(b.startDate));
         
     } else {
         // sort by priority
-        tasks.sort((a,b) => a.priority - b.priority);
+        localTasks.sort((a,b) => a.priority - b.priority);
     }
     refreshBoard();
     
