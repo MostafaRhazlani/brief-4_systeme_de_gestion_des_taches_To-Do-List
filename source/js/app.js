@@ -55,7 +55,7 @@ let tasks = [
         'endTime': '9:30',
         'ownerTask': 3,
         'status': 1,
-        'priority': 3
+        'priority': 1
     },
 ]
 
@@ -118,7 +118,7 @@ function refreshBoard() {
         let taskOfBoard = tasks.filter(task => task.status == itemBoard.columnId)
         
         htmlBoard += `
-            <div class="w-2/6 bg-gray-900 border border-gray-500 rounded-md max-h-full flex flex-col justify-between">
+            <div class="column w-2/6 bg-gray-900 border border-gray-500 rounded-md max-h-full flex flex-col justify-between">
                 <div class="w-full border-b border-gray-500 bg-gray-800 p-3 rounded-md">
                     <div class="flex items-center">
                         <div class="w-6 h-6 border-2 rounded-full ${changeColorBorderBoard} mr-3"></div>
@@ -172,14 +172,14 @@ function refreshBoard() {
 
                                     <p class="text-white text-sm mb-3 font-light tracking-wide p-2 bg-gray-500 rounded shadow-inner shadow-gray-700/100">${task.des}</p>
                                     <div class="flex justify-evenly items-center text-sm">
-                                        <div class="text-white">
+                                        <div class="text-white paragraphe-size">
                                             <p class="mb-1"><i class="fa-regular fa-calendar"></i>&nbsp;${task.startDate}</p>
                                             <p><i class="fa-regular fa-clock"></i>&nbsp;${task.startTime}</p>
                                         </div>
                                         
                                         <i class="fa-solid fa-arrow-right text-white text-lg"></i>
                                         
-                                        <div class="text-white">
+                                        <div class="text-white paragraphe-size">
                                             <p class="mb-1"><i class="fa-regular fa-calendar"></i>&nbsp;${task.endDate}</p>
                                             <p><i class="fa-regular fa-clock"></i>&nbsp;${task.endTime}</p>
                                         </div>
