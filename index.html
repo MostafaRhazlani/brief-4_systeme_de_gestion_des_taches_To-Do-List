@@ -15,17 +15,15 @@
     <div class="container mx-auto min-h-screen relative">
         <div id="blur-container" class="scroll-board w-5/6 mx-auto min-h-screen flex flex-col justify-center">
 
-            <div class="flex items-center w-5/6">
-                <div class="flex flex-col mb-3 mr-4">
+            <div class="flex items-center mb-3">
+                <div class="flex flex-col  mr-4">
                     <label class="text-white ml-2 w-36" for="select">Sort By</label>
                     <select id="select" class="select px-2 py-3 rounded-lg bg-gray-500 text-white">
                         <option value="date">Date</option>
                         <option value="priority">priority</option>
                     </select>
                 </div>
-                <!-- <div class="h-full"> -->
-                    <button class="removeAll bg-red-500 px-2 py-3 text-white rounded-md text-sm w-30 h-full"><i class="fa-regular fa-trash-can"></i>&nbsp;Delete All</button>
-                <!-- </div> -->
+                <button title="Remove All" class="removeAll bg-red-500 p-2 px-3 text-white rounded-full text-sm w-30 h-full mt-5 hover:bg-red-600"><i class="fa-regular fa-trash-can"></i></button>
             </div>
             <div id="board" class="board flex gap-x-3 max-h-[510px]">
                
