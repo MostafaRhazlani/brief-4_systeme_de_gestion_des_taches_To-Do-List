@@ -382,6 +382,7 @@ submit.addEventListener('click', (e) => {
     validateEnDate.innerText = '';
     validateEnTime.innerText = '';
 
+    // validation for title if empty or characters more than 25
     if (!title.value) {
         validateTitle.innerText = 'This field is required!';
         return;
@@ -390,6 +391,7 @@ submit.addEventListener('click', (e) => {
         return;
     }
 
+    // validation for description if empty or characters more than 100
     if (!des.value) {
         validateDes.innerText = 'This field is required!';
         return;
@@ -398,31 +400,67 @@ submit.addEventListener('click', (e) => {
         return;
     }
 
+    // validation for start date if empty 
     if (!startDate.value) {
         validateStDate.innerText = 'This field is required!';
         return;
     }
 
+    // validation for start time if empty 
     if (!startTime.value) {
         validateStTime.innerText = 'This field is required!';
         return;
     }
 
+    // validation for end date if empty 
     if (!endDate.value) {
         validateEnDate.innerText = 'This field is required!';
         return;
     }
 
+    // validation for end time if empty 
     if (!endTime.value) {
         validateEnTime.innerText = 'This field is required!';
         return;
     }
 
-    const startDateTime = new Date(`${startDate.value}T${startTime.value}`);
-    const endDateTime = new Date(`${endDate.value}T${endTime.value}`);
+    // the start and end date entered by user
+    let sDate = new Date(`${startDate.value}`);
+    let eDate = new Date(`${endDate.value}`);
+    
+    // set date without hours minutes and secondes
+    let nowDate = new Date();
+    nowDate.setHours(0,0,0,0);
+    
+    // check if start date before now date
+    if (sDate < nowDate) {
+        validateStDate.innerText = 'This Date in Past';
+        return;
+    }
 
-    if (endDateTime < startDateTime) {
+    // check if end date before start date
+    if (eDate < sDate) {
         validateEnDate.innerText = 'Start Date And Time Must Be After End Date And Time';
+        return;
+    }
+
+    // the start and end time entered by user
+    let sTime = new Date(`${startDate.value}T${startTime.value}`);
+    let eTime = new Date(`${endDate.value}T${endTime.value}`);
+
+    // set date now without seconds
+    let nowTime = new Date()
+    nowTime.setSeconds(-60)
+
+    // check if start time entered by user brfore time now
+    if(sTime < nowTime) {
+        validateStTime.innerText = 'This Time in Past';
+        return;
+    }
+
+    // check if end time entered by user before start time
+    if(eTime < sTime) {
+        validateEnTime.innerText = 'End Time Must Be After Start Time';
         return;
     }
 
