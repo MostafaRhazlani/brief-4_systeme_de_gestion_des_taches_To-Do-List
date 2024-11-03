@@ -443,6 +443,7 @@ submit.addEventListener('click', (e) => {
         'startTime': startTime.value,
         'endDate': endDate.value,
         'endTime': endTime.value,
+        'ownerTask': 1,
         'status': submit.dataset.id,
         'priority': priority.value
     }   
