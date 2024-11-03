@@ -17,6 +17,7 @@ body {
 
     .scroll-board {
         overflow: scroll;
+        width: 90%;
     }
 
     .scroll-board::-webkit-scrollbar {
@@ -30,11 +31,44 @@ body {
     .column {
         width: 100%;
     }
+
+    .form {
+        width: 80%;
+    }
+
+    .form input, .form textarea {
+        padding: 6px;
+        border-radius: 4px;
+        font-size: 13px;
+    }
+
+    .form p {
+        /* background-color: antiquewhite; */
+        padding: 2px 8px;
+    } 
+
+    .form select {
+        padding: 6px;
+        border-radius: 4px;
+        font-size: 13px;
+        /* appearance: none; */
+    }
+
+    .flex-date {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .flex-date > div {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 1024px) {
     .scroll-board {
         overflow: scroll;
+        width: 95%;
     }
 
     .scroll-board::-webkit-scrollbar {
