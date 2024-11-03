@@ -22,7 +22,7 @@ let tasks = [
     {
         'id':  1,
         'taskName' : 'section contact',
-        'des': 'Lorem ipsum, dolor sit amet consecte adipisicing elit. Ducimus, omnis!',
+        'des': 'Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis! Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis!',
         'startDate': 'Sun, Oct 24',
         'startTime': '9:30',
         'endDate': 'Tue, Oct 26',
@@ -36,7 +36,7 @@ let tasks = [
         'id':  2,
         'taskName' : 'card team',
         'startDate': 'Fri, Oct 27',
-        'des': 'Lorem ipsum, dolor sit amet consecte adipisicing elit. Ducimus, omnis!',
+        'des': 'Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis! Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis!',
         'startTime': '14:45',
         'endDate': 'Tue, Nov 01',
         'endTime': '10:00',
@@ -48,7 +48,7 @@ let tasks = [
     {
         'id':  3,
         'taskName' : 'section header',
-        'des': 'Lorem ipsum, dolor sit amet consecte adipisicing elit. Ducimus, omnis!',
+        'des': 'Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis! Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis!',
         'startDate': 'Sun, Oct 24',
         'startTime': '9:30',
         'endDate': 'Tue, Oct 26',
@@ -168,20 +168,20 @@ function refreshBoard() {
                                     </div>
                                 </div>
                                 <div class="p-3">
-                                    <h2 class="text-center text-lg font-semibold text-white mb-3">${task.taskName}</h2>
+                                    <h2 class=" text-lg font-semibold text-white mb-3">${task.taskName}</h2>
 
-                                    <p class="text-white text-sm mb-3 font-light tracking-wide">${task.des}</p>
-                                    <div class="flex justify-around items-center">
-                                        <div class="text-center text-white">
-                                            <p>${task.startDate}</p>
-                                            <p>${task.startTime}</p>
+                                    <p class="text-white text-sm mb-3 font-light tracking-wide p-2 bg-gray-500 rounded shadow-inner shadow-gray-700/100">${task.des}</p>
+                                    <div class="flex justify-evenly items-center text-sm">
+                                        <div class="text-white">
+                                            <p class="mb-1"><i class="fa-regular fa-calendar"></i>&nbsp;${task.startDate}</p>
+                                            <p><i class="fa-regular fa-clock"></i>&nbsp;${task.startTime}</p>
                                         </div>
                                         
-                                        <div class="w-20 h-1 bg-gray-300 rounded"></div>
+                                        <i class="fa-solid fa-arrow-right text-white text-lg"></i>
                                         
-                                        <div class="text-center text-white">
-                                            <p>${task.endDate}</p>
-                                            <p>${task.endTime}</p>
+                                        <div class="text-white">
+                                            <p class="mb-1"><i class="fa-regular fa-calendar"></i>&nbsp;${task.endDate}</p>
+                                            <p><i class="fa-regular fa-clock"></i>&nbsp;${task.endTime}</p>
                                         </div>
                                     </div>
                                 </div>
