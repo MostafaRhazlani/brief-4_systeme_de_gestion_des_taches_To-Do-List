@@ -69,11 +69,13 @@ let users = [
     {
         'id': 2,
         'name': 'Othmane Rhazlani',
+        'img': './source/img/photo youcode.jpg'
     },
 
     {
         'id': 3,
         'name': 'Azdin Rhazlani',
+        'img': './source/img/photo youcode.jpg'
     }
 ]
 
@@ -168,7 +170,7 @@ function refreshBoard() {
                                 <div class="p-3">
                                     <h2 class="text-center text-lg font-semibold text-white mb-3">${task.taskName}</h2>
 
-                                    <p class="text-white text-sm mb-3 font-light tracking-wide">Lorem ipsum, dolor sit amet consecte adipisicing elit. Ducimus, omnis!</p>
+                                    <p class="text-white text-sm mb-3 font-light tracking-wide">${task.des}</p>
                                     <div class="flex justify-around items-center">
                                         <div class="text-center text-white">
                                             <p>${task.startDate}</p>
@@ -306,6 +308,9 @@ const contentForm = `
                 <input class="title px-4 py-3 rounded-lg " type="text" placeholder="Enter title of task">
                 <p class="validateTitle text-sm p-2 h-9 text-red-400 mb-1"></p>
                 
+                <label class="text-white mb-1" for="">Description</label>
+                <textarea class="des px-4 py-3 rounded-lg max-h-24 min-h-16 focus:outline-none" name="" id="" placeholder="decription..."></textarea>
+                <p class="validateDes text-sm p-2 h-9 text-red-400 mb-1"></p>
                 <div class="flex gap-4">
                     <div class="w-2/4">
                         <label class="text-white mb-1" for="">Start Date Of Task</label>
@@ -354,6 +359,7 @@ form.innerHTML = contentForm;
 // elements of message for validation
 const submit = document.querySelector('#submit');
 const validateTitle = document.querySelector('.validateTitle');
+const validateDes = document.querySelector('.validateDes');
 const validateStDate = document.querySelector('.validateStDate');
 const validateStTime = document.querySelector('.validateStTime');
 const validateEnDate = document.querySelector('.validateEnDate');
@@ -361,6 +367,7 @@ const validateEnTime = document.querySelector('.validateEnTime');
 
 // elements of inputs
 const title = document.querySelector('.title');
+const des = document.querySelector('.des');
 const startDate = document.querySelector('.startDate');
 const startTime = document.querySelector('.startTime');
 const endDate = document.querySelector('.endDate');
@@ -373,6 +380,7 @@ submit.addEventListener('click', (e) => {
     e.preventDefault();
 
     validateTitle.innerText = '';
+    validateDes.innerText = '';
     validateStDate.innerText = '';
     validateStTime.innerText = '';
     validateEnDate.innerText = '';
@@ -383,6 +391,14 @@ submit.addEventListener('click', (e) => {
         return;
     } else if (title.value.length > 25) {
         validateTitle.innerText = 'Title is Too Long';
+        return;
+    }
+
+    if (!des.value) {
+        validateDes.innerText = 'This field is required!';
+        return;
+    } else if (des.value.length > 100) {
+        validateDes.innerText = 'Description is Too Long';
         return;
     }
 
@@ -422,6 +438,7 @@ submit.addEventListener('click', (e) => {
     let taskObject = {
         'id':  index++,
         'taskName' : title.value,
+        'des' : des.value,
         'startDate': startDate.value,
         'startTime': startTime.value,
         'endDate': endDate.value,
@@ -437,6 +454,7 @@ submit.addEventListener('click', (e) => {
 
     // reset data
     title.value = '';
+    des.value = '';
     startDate.value = '';
     startTime.value = '';
     endDate.value = '';
@@ -459,6 +477,7 @@ closeForm.addEventListener('click', (e) => {
 
     // reset data
     title.value = '';
+    des.value = '';
     startDate.value = '';
     startTime.value = '';
     endDate.value = '';
