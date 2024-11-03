@@ -21,52 +21,61 @@ let columnBoard = [
 let tasks = [
     {
         'id':  1,
-        'taskName' : 'mostafa',
-        'startDate': '2',
-        'startTime': '48448',
-        'endDate': '8885251',
-        'endTime': '8788454',
+        'taskName' : 'section contact',
+        'des': 'Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis! Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis!',
+        'startDate': 'Sun, Oct 24',
+        'startTime': '9:30',
+        'endDate': 'Tue, Oct 26',
+        'endTime': '9:30',
+        'ownerTask': 2,
         'status': 1,
         'priority': 2
     },
 
     {
         'id':  2,
-        'taskName' : 'othmane',
-        'startDate': '1',
-        'startTime': '48448',
-        'endDate': '8885251',
-        'endTime': '8788454',
-        'status': 1,
+        'taskName' : 'card team',
+        'startDate': 'Fri, Oct 27',
+        'des': 'Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis! Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis!',
+        'startTime': '14:45',
+        'endDate': 'Tue, Nov 01',
+        'endTime': '10:00',
+        'ownerTask': 1,
+        'status': 2,
         'priority': 1
     },
 
     {
         'id':  3,
-        'taskName' : 'azdin',
-        'startDate': '10-02',
-        'startTime': '48448',
-        'endDate': '8885251',
-        'endTime': '8788454',
-        'status': 2,
-        'priority': 3
-    }
+        'taskName' : 'section header',
+        'des': 'Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis! Lorem ipsum, dolor sit amet consecte adipisi elit. Ducimus, omnis!',
+        'startDate': 'Sun, Oct 24',
+        'startTime': '9:30',
+        'endDate': 'Tue, Oct 26',
+        'endTime': '9:30',
+        'ownerTask': 3,
+        'status': 1,
+        'priority': 1
+    },
 ]
 
 let users = [
     {
         'id': 1,
         'name': 'Mostafa Rhazlani',
+        'img': './source/img/photo youcode.jpg'
     },
 
     {
         'id': 2,
         'name': 'Othmane Rhazlani',
+        'img': './source/img/photo youcode.jpg'
     },
 
     {
         'id': 3,
         'name': 'Azdin Rhazlani',
+        'img': './source/img/photo youcode.jpg'
     }
 ]
 
@@ -109,7 +118,7 @@ function refreshBoard() {
         let taskOfBoard = tasks.filter(task => task.status == itemBoard.columnId)
         
         htmlBoard += `
-            <div class="w-2/6 bg-gray-900 border border-gray-500 rounded-md max-h-full flex flex-col justify-between">
+            <div class="column w-2/6 bg-gray-900 border border-gray-500 rounded-md max-h-full flex flex-col justify-between">
                 <div class="w-full border-b border-gray-500 bg-gray-800 p-3 rounded-md">
                     <div class="flex items-center">
                         <div class="w-6 h-6 border-2 rounded-full ${changeColorBorderBoard} mr-3"></div>
@@ -121,11 +130,11 @@ function refreshBoard() {
                 <div class="h-5/6 flex flex-col justify-between">
                     <div class="w-11/12 h-[350px] mx-auto overflow-auto hideScroll">
                         ${taskOfBoard.length != 0 ? taskOfBoard.map(task =>
-                            `<div class="task bg-gray-700 rounded-md mt-3 border border-gray-600" data-task-id="${task.id}">
-                                <div class="parent w-full bg-gray-800 p-2 rounded flex justify-between border-b border-gray-600 relative">
+                            `<div class="task bg-gray-700 rounded-md mt-2 border border-gray-600" data-task-id="${task.id}">
+                                <div class="w-full bg-gray-800 p-2 rounded flex justify-between items-center border-b border-gray-600 relative">
                                     <div class="flex items-center">
-                                        <div class="w-8 h-8 rounded-full bg-white mr-3"></div>
-                                        <p class="mr-3 text-white font-poppins">Mostafa</p>
+                                        <img src="${findObject(users, task.ownerTask).img}" alt="" class="border-2 border-zinc-400 w-8 h-8 rounded-full mr-3">
+                                        <p class="mr-3 text-white font-poppins">${findObject(users, task.ownerTask).name}</p>
                                         <span class="px-2 text-sm font-medium text-center text-white rounded-full ${findObject(priorities, task.priority).name == 'P1' ? 'bg-red-500 border-2 border-red-700' : findObject(priorities, task.priority).name  == 'P2' ? 'bg-orange-500 border-2 border-orange-700' : 'bg-green-500 border-2 border-green-700'} mr-3">${findObject(priorities, task.priority).name }</span>
                                     </div>
                                     
@@ -159,26 +168,27 @@ function refreshBoard() {
                                     </div>
                                 </div>
                                 <div class="p-3">
-                                    <h2 class="text-center text-lg font-semibold text-white mb-3">${task.taskName}</h2>
-                    
-                                    <div class="flex justify-around items-center">
-                                        <div class="text-center text-white">
-                                            <p>${task.startDate}</p>
-                                            <p>${task.startTime}</p>
+                                    <h2 class=" text-lg font-semibold text-white mb-3">${task.taskName}</h2>
+
+                                    <p class="text-white text-sm mb-3 font-light tracking-wide p-2 bg-gray-500 rounded shadow-inner shadow-gray-700/100">${task.des}</p>
+                                    <div class="flex justify-evenly items-center text-sm">
+                                        <div class="text-white paragraphe-size">
+                                            <p class="mb-1"><i class="fa-regular fa-calendar"></i>&nbsp;${task.startDate}</p>
+                                            <p><i class="fa-regular fa-clock"></i>&nbsp;${task.startTime}</p>
                                         </div>
                                         
-                                        <div class="w-20 h-1 bg-gray-300 rounded"></div>
+                                        <i class="fa-solid fa-arrow-right text-white text-lg"></i>
                                         
-                                        <div class="text-center text-white">
-                                            <p>${task.endDate}</p>
-                                            <p>${task.endTime}</p>
+                                        <div class="text-white paragraphe-size">
+                                            <p class="mb-1"><i class="fa-regular fa-calendar"></i>&nbsp;${task.endDate}</p>
+                                            <p><i class="fa-regular fa-clock"></i>&nbsp;${task.endTime}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>`
                         ).join('') : `<p class="text-white p-3 text-center">Tasks Not Found</p>` }
                     </div>
-                    <div id="displyForm" class="bg-gray-900 w-full rounded-b-md p-4 text-gray-400 hover:bg-gray-700 cursor-pointer">
+                    <div id="displyForm" class="bg-gray-900 w-full rounded-b-md p-4 mt-2 text-gray-400 hover:bg-gray-700 cursor-pointer">
                         <p> <span><i class="fa-solid fa-plus"></i></span> Add item</p>
                     </div>
                 </div>    
@@ -255,10 +265,6 @@ function refreshBoard() {
                         // get id of itemBoard and id of task
                         let columnId = parseInt(event.currentTarget.dataset.columnId)
                         let taskId = event.currentTarget.closest('.task').dataset.taskId
-                        
-                        console.log('column id => ',columnId);
-                        
-                        console.log('task id => ',taskId);
 
                         // check if status of task equal id of itemBoard
                         if(findObject(tasks, taskId)) {
@@ -298,6 +304,9 @@ const contentForm = `
                 <input class="title px-4 py-3 rounded-lg " type="text" placeholder="Enter title of task">
                 <p class="validateTitle text-sm p-2 h-9 text-red-400 mb-1"></p>
                 
+                <label class="text-white mb-1" for="">Description</label>
+                <textarea class="des px-4 py-3 rounded-lg max-h-24 min-h-16 focus:outline-none" name="" id="" placeholder="decription..."></textarea>
+                <p class="validateDes text-sm p-2 h-9 text-red-400 mb-1"></p>
                 <div class="flex gap-4">
                     <div class="w-2/4">
                         <label class="text-white mb-1" for="">Start Date Of Task</label>
@@ -325,13 +334,15 @@ const contentForm = `
                 </div>
 
                 <label class="text-white mb-1" for="">Select Priority Of Task</label>
-                <select class="priority px-4 py-3 rounded-lg mb-4">
+                <select class="priority px-4 py-3 rounded-lg">
                     <optgroup label="Priority">
+                    <option value=""></option>
                     <option value="1">P1</option>
                     <option value="2">P2</option>
                     <option value="3">P3</option>
                     </optgroup>
                 </select>
+                <p class="validatePriority text-sm p-2 h-9 text-red-400 mb-1"></p>
                 
                 <div class="flex justify-between mt-5">
                 <button id="closeForm" class="text-white w-1/5 bg-gray-600 py-3 rounded-lg duration-500 hover:bg-gray-500 cursor-pointer hover:duration-500 hover:scale-[1.06]">Cancel</button>
@@ -346,13 +357,16 @@ form.innerHTML = contentForm;
 // elements of message for validation
 const submit = document.querySelector('#submit');
 const validateTitle = document.querySelector('.validateTitle');
+const validateDes = document.querySelector('.validateDes');
 const validateStDate = document.querySelector('.validateStDate');
 const validateStTime = document.querySelector('.validateStTime');
 const validateEnDate = document.querySelector('.validateEnDate');
 const validateEnTime = document.querySelector('.validateEnTime');
+const validatePriority = document.querySelector('.validatePriority');
 
 // elements of inputs
 const title = document.querySelector('.title');
+const des = document.querySelector('.des');
 const startDate = document.querySelector('.startDate');
 const startTime = document.querySelector('.startTime');
 const endDate = document.querySelector('.endDate');
@@ -365,11 +379,14 @@ submit.addEventListener('click', (e) => {
     e.preventDefault();
 
     validateTitle.innerText = '';
+    validateDes.innerText = '';
     validateStDate.innerText = '';
     validateStTime.innerText = '';
     validateEnDate.innerText = '';
     validateEnTime.innerText = '';
+    validatePriority.innerText = '';
 
+    // validation for title if empty or characters more than 25
     if (!title.value) {
         validateTitle.innerText = 'This field is required!';
         return;
@@ -378,46 +395,93 @@ submit.addEventListener('click', (e) => {
         return;
     }
 
+    // validation for description if empty or characters more than 100
+    if (!des.value) {
+        validateDes.innerText = 'This field is required!';
+        return;
+    } else if (des.value.length > 100) {
+        validateDes.innerText = 'Description is Too Long';
+        return;
+    }
+
+    // validation for start date if empty 
     if (!startDate.value) {
         validateStDate.innerText = 'This field is required!';
         return;
     }
 
+    // validation for start time if empty 
     if (!startTime.value) {
         validateStTime.innerText = 'This field is required!';
         return;
     }
 
+    // validation for end date if empty 
     if (!endDate.value) {
         validateEnDate.innerText = 'This field is required!';
         return;
     }
 
+    // validation for end time if empty 
     if (!endTime.value) {
         validateEnTime.innerText = 'This field is required!';
         return;
     }
 
-    const startDateTime = new Date(`${startDate.value}T${startTime.value}`);
-    const endDateTime = new Date(`${endDate.value}T${endTime.value}`);
+    // the start and end date entered by user
+    let sDate = new Date(`${startDate.value}`);
+    let eDate = new Date(`${endDate.value}`);
+    
+    // set date without hours minutes and secondes
+    let nowDate = new Date();
+    nowDate.setHours(0,0,0,0);
+    
+    // check if start date before now date
+    if (sDate < nowDate) {
+        validateStDate.innerText = 'This Date in Past';
+        return;
+    }
 
-    if (endDateTime < startDateTime) {
+    // check if end date before start date
+    if (eDate < sDate) {
         validateEnDate.innerText = 'Start Date And Time Must Be After End Date And Time';
         return;
     }
 
+    // the start and end time entered by user
+    let sTime = new Date(`${startDate.value}T${startTime.value}`);
+    let eTime = new Date(`${endDate.value}T${endTime.value}`);
+
+    // set date now without seconds
+    let nowTime = new Date()
+    nowTime.setSeconds(-60)
+
+    // check if start time entered by user brfore time now
+    if(sTime < nowTime) {
+        validateStTime.innerText = 'This Time in Past';
+        return;
+    }
+
+    // check if end time entered by user before start time
+    if(eTime < sTime) {
+        validateEnTime.innerText = 'End Time Must Be After Start Time';
+        return;
+    }
+
     if (priority.value === '') {
-        validateTitle.innerText = 'Please select a priority!';
+        validatePriority.innerText = 'Please select a priority!';
         return;
     }
 
     let taskObject = {
         'id':  index++,
         'taskName' : title.value,
+        'des' : des.value,
         'startDate': startDate.value,
         'startTime': startTime.value,
         'endDate': endDate.value,
         'endTime': endTime.value,
+        'ownerTask': 1,
         'status': submit.dataset.id,
         'priority': priority.value
     }   
@@ -429,6 +493,7 @@ submit.addEventListener('click', (e) => {
 
     // reset data
     title.value = '';
+    des.value = '';
     startDate.value = '';
     startTime.value = '';
     endDate.value = '';
@@ -451,6 +516,7 @@ closeForm.addEventListener('click', (e) => {
 
     // reset data
     title.value = '';
+    des.value = '';
     startDate.value = '';
     startTime.value = '';
     endDate.value = '';

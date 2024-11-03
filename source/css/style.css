@@ -7,3 +7,44 @@ body {
 .hideScroll::-webkit-scrollbar {
     display: none;
 }
+
+@media screen and (max-width: 640px) {
+    .select {
+        width: 200px;
+        outline: none;
+        appearance: none;
+    }
+
+    .scroll-board {
+        overflow: scroll;
+    }
+
+    .board {
+        width: 1200px;
+    }
+
+    .column {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .scroll-board {
+        overflow: scroll;
+    }
+
+    .board {
+        width: 950px;
+    }
+
+    .column {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .paragraphe-size > p {
+        font-size: 12px;
+        text-align: center;
+    }
+}
