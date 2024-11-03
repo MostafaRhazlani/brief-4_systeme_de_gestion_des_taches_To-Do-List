@@ -96,6 +96,11 @@ let priorities = [
     },
 ]
 
+if (!localStorage.getItem('localTasks')) {
+    localStorage.setItem('localTasks', JSON.stringify(tasks))
+}
+
+let localTasks = JSON.parse( localStorage.getItem('localTasks'))
 
 // function to find id include in array 
 const findObject = (array, id) => {
@@ -114,8 +119,9 @@ function refreshBoard() {
     columnBoard.forEach(itemBoard => {
 
         let changeColorBorderBoard = itemBoard.columnId == 1 ? 'border-blue-600' : itemBoard.columnId == 2 ? 'border-yellow-600' : 'border-purple-600'
-    
-        let taskOfBoard = tasks.filter(task => task.status == itemBoard.columnId)
+        localTasks = JSON.parse( localStorage.getItem('localTasks'))
+
+        let taskOfBoard = localTasks.filter(task => task.status == itemBoard.columnId)
         
         htmlBoard += `
             <div class="column w-2/6 bg-gray-900 border border-gray-500 rounded-md max-h-full flex flex-col justify-between">
@@ -266,10 +272,17 @@ function refreshBoard() {
                         let columnId = parseInt(event.currentTarget.dataset.columnId)
                         let taskId = event.currentTarget.closest('.task').dataset.taskId
 
+                        console.log("localTasks ->",localTasks);
                         // check if status of task equal id of itemBoard
-                        if(findObject(tasks, taskId)) {
+                        let updateStatus = localTasks
+                        if(findObject(updateStatus, taskId)) {
 
-                            findObject(tasks, taskId).status = columnId;
+                            
+                            findObject(updateStatus, taskId).status = columnId;
+                            
+                            console.log("updateStatus ->",updateStatus);
+                            localStorage.setItem('localTasks', JSON.stringify(updateStatus))
+
                             refreshBoard();
                         }
                     })
@@ -283,9 +296,9 @@ function refreshBoard() {
         remove.addEventListener('click', (event) => {
             let taskId = event.currentTarget.closest('.task').dataset.taskId
 
-            let removeTask = tasks.filter(task => task.id != taskId)
+            let removeTask = localTasks.filter(task => task.id != taskId)
 
-            tasks = removeTask
+            localStorage.setItem("localTasks", JSON.stringify(removeTask))
             refreshBoard();
         })
     })
@@ -296,40 +309,52 @@ refreshBoard();
 // event display and close form add item
 const form = document.querySelector("#formAddItem");
 const contentForm = `
-    <div class="w-1/2 mx-auto">
+    <div class="xl:w-1/2 lg:w-1/2 md:w-3/4 sm:w-4/6  mx-auto form">
         <div class="mt-10 bg-gray-700 shadow-black p-5 rounded-lg ">
             <h2 class="text-center text-3xl mt-3 mb-7 font-bold text-white">Add Task</h2>
             <form action="" method="get" class="flex flex-col">
                 <label class="text-white mb-1" for="">Title Of Task</label>
                 <input class="title px-4 py-3 rounded-lg " type="text" placeholder="Enter title of task">
-                <p class="validateTitle text-sm p-2 h-9 text-red-400 mb-1"></p>
+                <div class="h-6 px-2 pt-1">
+                    <p class="validateTitle text-sm text-red-400"></p>
+                </div>
                 
-                <label class="text-white mb-1" for="">Description</label>
+                <label class="text-white mb-1 pl-2" for="">Description</label>
                 <textarea class="des px-4 py-3 rounded-lg max-h-24 min-h-16 focus:outline-none" name="" id="" placeholder="decription..."></textarea>
-                <p class="validateDes text-sm p-2 h-9 text-red-400 mb-1"></p>
-                <div class="flex gap-4">
+                <div class="h-6 px-2 pt-1">
+                    <p class="validateDes text-sm text-red-400"></p>
+                </div>
+                <div class="flex-date flex lg:gap-4">
                     <div class="w-2/4">
                         <label class="text-white mb-1" for="">Start Date Of Task</label>
                         <input class="startDate px-4 py-3 w-full rounded-lg" type="date">
-                        <p class="validateStDate text-sm p-2 h-9 text-red-400 mb-1"></p>
+                        <div class="h-6 px-2 pt-1">
+                            <p class="validateStDate text-sm text-red-400"></p>
+                        </div>
                     </div>                    
                     <div class="w-2/4">
                         <label class="text-white mb-1" for="">Start Time Of Task</label>
                         <input class="startTime px-4 py-3 w-full rounded-lg" type="time">
-                        <p class="validateStTime text-sm p-2 h-9 text-red-400 mb-1"></p>
+                        <div class="h-6 px-2 pt-1">
+                            <p class="validateStTime text-sm text-red-400"></p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="flex gap-4">
+                <div class="flex-date flex lg:gap-4">
                     <div class="w-2/4">
                         <label class="text-white mb-1" for="">End Date Of Task</label>
                         <input class="endDate px-4 py-3 w-full rounded-lg" type="date">
-                        <p class="validateEnDate text-sm p-2 h-9 text-red-400 mb-1"></p>
+                        <div class="h-6 px-2 pt-1">
+                            <p class="validateEnDate text-sm text-red-400"></p>
+                        </div>
                     </div>                    
                     <div class="w-2/4">
                         <label class="text-white mb-1" for="">End Time Of Task</label>
                         <input class="endTime px-4 py-3 w-full rounded-lg" type="time">
-                        <p class="validateEnTime text-sm p-2 h-9 text-red-400 mb-1"></p>
+                        <div class="h-6 px-2 pt-1">
+                            <p class="validateEnTime text-sm text-red-400"></p>
+                        </div>
                     </div>
                 </div>
 
@@ -342,11 +367,13 @@ const contentForm = `
                     <option value="3">P3</option>
                     </optgroup>
                 </select>
-                <p class="validatePriority text-sm p-2 h-9 text-red-400 mb-1"></p>
+                <div class="h-6 px-2 pt-1">
+                    <p class="validatePriority text-sm text-red-400"></p>
+                </div>
                 
                 <div class="flex justify-between mt-5">
                 <button id="closeForm" class="text-white w-1/5 bg-gray-600 py-3 rounded-lg duration-500 hover:bg-gray-500 cursor-pointer hover:duration-500 hover:scale-[1.06]">Cancel</button>
-                    <input id="submit" type="submit" value="Add" class="text-white w-1/5 bg-gray-500 py-3 rounded-lg duration-500 hover:bg-gray-400 cursor-pointer hover:duration-500 hover:scale-[1.06]"">
+                <button id="submit" type="submit" class="text-white w-1/5 bg-gray-500 py-3 rounded-lg duration-500 hover:bg-gray-400 cursor-pointer hover:duration-500 hover:scale-[1.06]">Add</button>
                 </div>
             </form>
         </div>
@@ -487,8 +514,10 @@ submit.addEventListener('click', (e) => {
     }   
 
     
-    tasks.push(taskObject);
+    let addNewTask = localTasks;
+    addNewTask.push(taskObject)
     
+    localStorage.setItem('localTasks', JSON.stringify(addNewTask))
     refreshBoard();
 
     // reset data
@@ -531,11 +560,11 @@ select.addEventListener('change', (event) => {
 
     if(value == 'date') {
         // sort by date
-        tasks.sort((a,b) => a.startDate.localeCompare(b.startDate));
+        localTasks.sort((a,b) => a.startDate.localeCompare(b.startDate));
         
     } else {
         // sort by priority
-        tasks.sort((a,b) => a.priority - b.priority);
+        localTasks.sort((a,b) => a.priority - b.priority);
     }
     refreshBoard();
     
