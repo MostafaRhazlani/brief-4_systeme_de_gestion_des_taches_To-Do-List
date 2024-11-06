@@ -68,6 +68,8 @@ const findObject = (array, id) => {
 
 const blurContainer = document.querySelector('#blur-container');
 
+// gloabal variable to get current task id
+let currentTaskId;
 function refreshBoard() {
     // tbody element
     const board = document.querySelector("#board");
@@ -193,6 +195,8 @@ function refreshBoard() {
             let getTask = localTasks;
 
             let taskId = e.currentTarget.closest('.task').dataset.taskId
+
+            currentTaskId = taskId;
             getTask.forEach(task => {
                 if(taskId == task.id) {
                     title.value = task.taskName;
@@ -393,7 +397,7 @@ const priority = document.querySelector('.priority');
 
 const titleForm = document.querySelector('.titleForm');
 
-let index = 1
+let idTask = 1
 
 submit.addEventListener('click', (e) => {
     e.preventDefault();
@@ -494,9 +498,9 @@ submit.addEventListener('click', (e) => {
     }
 
     if(titleForm.innerText == 'Add Task') {
-        console.log('gggggggggg');
+        // add task
         let taskObject = {
-            'id':  index++,
+            'id':  idTask++,
             'taskName' : title.value,
             'des' : des.value,
             'startDate': startDate.value,
@@ -517,8 +521,22 @@ submit.addEventListener('click', (e) => {
         
     } else {
         
-        // localStorage.setItem('localTasks', JSON.stringify(editTask))
-        // refreshBoard();
+        // edit task
+        let editTask = localTasks;
+        let updateTask = findObject(editTask, currentTaskId)
+        
+        if(updateTask) {
+            updateTask.taskName = title.value;
+            updateTask.des = des.value;
+            updateTask.startDate = startDate.value;
+            updateTask.startTime = startTime.value;
+            updateTask.endDate = endDate.value;
+            updateTask.endTime = endTime.value;
+            updateTask.priority = priority.value; 
+        }
+
+        localStorage.setItem('localTasks', JSON.stringify(editTask))
+        refreshBoard();
     }
 
     
