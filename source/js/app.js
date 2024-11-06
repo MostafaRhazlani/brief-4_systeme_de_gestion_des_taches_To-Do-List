@@ -308,53 +308,53 @@ const contentForm = `
         <div class="mt-10 bg-gray-700 shadow-black p-5 rounded-lg ">
             <h2 class="titleForm text-center text-3xl mt-3 mb-7 font-bold text-white">Add Task</h2>
             <form action="" method="get" class="flex flex-col">
-                <label class="text-white mb-1" for="">Title Of Task</label>
-                <input class="title px-4 py-3 rounded-lg " type="text" placeholder="Enter title of task">
+                <label class="text-white mb-1 pl-1" for="">Title Of Task</label>
+                <input class="title px-2 py-2 rounded-md " type="text" placeholder="Enter title of task">
                 <div class="h-6 px-2 pt-1">
                     <p class="validateTitle text-sm text-red-400"></p>
                 </div>
                 
-                <label class="text-white mb-1 pl-2" for="">Description</label>
-                <textarea class="des px-4 py-3 rounded-lg max-h-24 min-h-16 focus:outline-none" name="" id="" placeholder="decription..."></textarea>
+                <label class="text-white mb-1 pl-1" for="">Description</label>
+                <textarea class="des px-2 py-2 rounded-md max-h-24 min-h-16 focus:outline-none" name="" id="" placeholder="decription..."></textarea>
                 <div class="h-6 px-2 pt-1">
                     <p class="validateDes text-sm text-red-400"></p>
                 </div>
-                <div class="flex-date flex lg:gap-4">
+                <div class="flex-date flex sm:gap-4">
                     <div class="w-2/4">
-                        <label class="text-white mb-1" for="">Start Date Of Task</label>
-                        <input class="startDate px-4 py-3 w-full rounded-lg" type="date">
+                        <label class="text-white mb-1 pl-1" for="">Start Date Of Task</label>
+                        <input class="startDate px-2 py-2 rounded-md w-full" type="date">
                         <div class="h-6 px-2 pt-1">
                             <p class="validateStDate text-sm text-red-400"></p>
                         </div>
                     </div>                    
                     <div class="w-2/4">
-                        <label class="text-white mb-1" for="">Start Time Of Task</label>
-                        <input class="startTime px-4 py-3 w-full rounded-lg" type="time">
+                        <label class="text-white mb-1 pl-1" for="">Start Time Of Task</label>
+                        <input class="startTime px-2 py-2 rounded-md w-full" type="time">
                         <div class="h-6 px-2 pt-1">
                             <p class="validateStTime text-sm text-red-400"></p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="flex-date flex lg:gap-4">
+                <div class="flex-date flex sm:gap-4">
                     <div class="w-2/4">
-                        <label class="text-white mb-1" for="">End Date Of Task</label>
-                        <input class="endDate px-4 py-3 w-full rounded-lg" type="date">
+                        <label class="text-white mb-1 pl-1" for="">End Date Of Task</label>
+                        <input class="endDate px-2 py-2 rounded-md w-full" type="date">
                         <div class="h-6 px-2 pt-1">
                             <p class="validateEnDate text-sm text-red-400"></p>
                         </div>
                     </div>                    
                     <div class="w-2/4">
-                        <label class="text-white mb-1" for="">End Time Of Task</label>
-                        <input class="endTime px-4 py-3 w-full rounded-lg" type="time">
+                        <label class="text-white mb-1 pl-1" for="">End Time Of Task</label>
+                        <input class="endTime px-2 py-2 rounded-md w-full" type="time">
                         <div class="h-6 px-2 pt-1">
                             <p class="validateEnTime text-sm text-red-400"></p>
                         </div>
                     </div>
                 </div>
 
-                <label class="text-white mb-1" for="">Select Priority Of Task</label>
-                <select class="priority px-4 py-3 rounded-lg">
+                <label class="text-white mb-1 pl-1" for="">Select Priority Of Task</label>
+                <select class="priority px-2 py-2 rounded-md">
                     <optgroup label="Priority">
                     <option value=""></option>
                     <option value="1">P1</option>
@@ -366,9 +366,9 @@ const contentForm = `
                     <p class="validatePriority text-sm text-red-400"></p>
                 </div>
                 
-                <div class="flex justify-between mt-5">
-                <button id="closeForm" class="text-white w-1/5 bg-gray-600 py-3 rounded-lg duration-500 hover:bg-gray-500 cursor-pointer hover:duration-500 hover:scale-[1.06]">Cancel</button>
-                <button id="submit" type="submit" class="text-white w-1/5 bg-gray-500 py-3 rounded-lg duration-500 hover:bg-gray-400 cursor-pointer hover:duration-500 hover:scale-[1.06]">Add</button>
+                <div class="flex justify-between mt-3 btns">
+                    <button id="closeForm" class="text-white w-2/6 bg-gray-600 p-3 rounded-lg duration-500 hover:bg-gray-500 cursor-pointer hover:duration-500 hover:scale-[1.06]">Cancel</button>
+                    <button id="submit" type="submit" class="text-white w-2/6 bg-gray-500 py-3 rounded-lg duration-500 hover:bg-gray-400 cursor-pointer hover:duration-500 hover:scale-[1.06]">Add</button>
                 </div>
             </form>
         </div>
