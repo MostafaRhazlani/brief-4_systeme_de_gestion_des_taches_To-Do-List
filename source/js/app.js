@@ -68,6 +68,8 @@ const findObject = (array, id) => {
 
 const blurContainer = document.querySelector('#blur-container');
 
+// gloabal variable to get current task id
+let currentTaskId;
 function refreshBoard() {
     // tbody element
     const board = document.querySelector("#board");
@@ -107,9 +109,12 @@ function refreshBoard() {
                                     </span>
 
                                     <div class="options bg-slate-900 w-48 p-1 rounded border border-gray-500 absolute top-8 right-1 z-10 hidden">
-                                        <div class="editTask flex justify-between items-center w-full px-2 py-1 text-sm text-start font-light text-white hover:cursor-pointer hover:bg-gray-600 hover:bg-opacity-20 rounded">
+                                        <div class="moveTask flex justify-between items-center w-full px-2 py-1 text-sm text-start font-light text-white hover:cursor-pointer hover:bg-gray-600 hover:bg-opacity-20 rounded">
                                             <button><i class="fa-solid fa-arrows-left-right"></i>&nbsp;&nbsp;Move To Column</button>
                                             <i class="fa-solid fa-chevron-right"></i>
+                                        </div>
+                                        <div class="displayFromEdit flex justify-between items-center w-full px-2 py-1 text-sm text-start font-light text-white hover:cursor-pointer hover:bg-gray-600 hover:bg-opacity-20 rounded">
+                                            <button><i class="fa-regular fa-pen-to-square"></i>&nbsp;&nbsp;Edit Task</button>
                                         </div>
                                         <button class="deleteTask w-full px-2 py-1 text-sm text-start font-light text-red-500 hover:bg-red-500 hover:text-red-400 hover:bg-opacity-15 rounded">
                                             <i class="fa-regular fa-trash-can"></i>&nbsp;&nbsp;
@@ -162,9 +167,13 @@ function refreshBoard() {
     
     board.innerHTML = htmlBoard;
     const displyForm = document.querySelectorAll('#displyForm');
+    const displayFormEdit = document.querySelectorAll('.displayFromEdit');
+   
     // event display form
     displyForm.forEach((btn, columnId) => {
         btn.addEventListener('click', () => {
+            const titleForm = document.querySelector('.titleForm');
+            titleForm.innerText = 'Add Task';
             form.classList.add('flex')
             form.classList.remove('hidden')
             submit.dataset.id = columnId + 1;
@@ -173,10 +182,40 @@ function refreshBoard() {
         })
     })
 
+    displayFormEdit.forEach(btn => {
+        btn.addEventListener('click', (e) =>{
+            const titleForm = document.querySelector('.titleForm');
+            titleForm.innerText = 'Edit Task';
+            
+            form.classList.add('flex')
+            form.classList.remove('hidden')
+
+            blurContainer.classList.add('blur-lg');
+
+            let getTask = localTasks;
+
+            let taskId = e.currentTarget.closest('.task').dataset.taskId
+
+            currentTaskId = taskId;
+            getTask.forEach(task => {
+                if(taskId == task.id) {
+                    title.value = task.taskName;
+                    des.value = task.des;
+                    startDate.value = task.startDate;
+                    startTime.value = task.startTime;
+                    endDate.value = task.endDate;
+                    endTime.value = task.endTime;
+                    priority.value = task.priority;
+                    
+                }
+            })
+        })
+    })
+
     const menus = document.querySelectorAll('.menu');
     const options = document.querySelectorAll('.options');
     const columns = document.querySelectorAll('.columns');
-    const editTask = document.querySelectorAll('.editTask');
+    const moveTask = document.querySelectorAll('.moveTask');
     const deleteTask = document.querySelectorAll('.deleteTask');
     
     // show or hide option when click on button menu
@@ -203,7 +242,7 @@ function refreshBoard() {
 
     
     // show or hide columns if click on button move to column
-    editTask.forEach((edit, index) => {
+    moveTask.forEach((edit, index) => {
         edit.addEventListener('click', () => {
             
             const currentColumn = columns[index]
@@ -267,7 +306,7 @@ const form = document.querySelector("#formAddItem");
 const contentForm = `
     <div class="xl:w-1/2 lg:w-1/2 md:w-3/4 sm:w-4/6  mx-auto form">
         <div class="mt-10 bg-gray-700 shadow-black p-5 rounded-lg ">
-            <h2 class="text-center text-3xl mt-3 mb-7 font-bold text-white">Add Task</h2>
+            <h2 class="titleForm text-center text-3xl mt-3 mb-7 font-bold text-white">Add Task</h2>
             <form action="" method="get" class="flex flex-col">
                 <label class="text-white mb-1" for="">Title Of Task</label>
                 <input class="title px-4 py-3 rounded-lg " type="text" placeholder="Enter title of task">
@@ -356,11 +395,13 @@ const endDate = document.querySelector('.endDate');
 const endTime = document.querySelector('.endTime');
 const priority = document.querySelector('.priority');
 
-let index = 1
+const titleForm = document.querySelector('.titleForm');
+
+let idTask = 1
 
 submit.addEventListener('click', (e) => {
     e.preventDefault();
-
+    
     validateTitle.innerText = '';
     validateDes.innerText = '';
     validateStDate.innerText = '';
@@ -456,25 +497,49 @@ submit.addEventListener('click', (e) => {
         return;
     }
 
-    let taskObject = {
-        'id':  index++,
-        'taskName' : title.value,
-        'des' : des.value,
-        'startDate': startDate.value,
-        'startTime': startTime.value,
-        'endDate': endDate.value,
-        'endTime': endTime.value,
-        'ownerTask': 1,
-        'status': submit.dataset.id,
-        'priority': priority.value
-    }   
+    if(titleForm.innerText == 'Add Task') {
+        // add task
+        let taskObject = {
+            'id':  idTask++,
+            'taskName' : title.value,
+            'des' : des.value,
+            'startDate': startDate.value,
+            'startTime': startTime.value,
+            'endDate': endDate.value,
+            'endTime': endTime.value,
+            'ownerTask': 1,
+            'status': submit.dataset.id,
+            'priority': priority.value
+        }   
+    
+        
+        let addNewTask = localTasks;
+        addNewTask.push(taskObject)
+        
+        localStorage.setItem('localTasks', JSON.stringify(addNewTask))
+        refreshBoard();
+        
+    } else {
+        
+        // edit task
+        let editTask = localTasks;
+        let updateTask = findObject(editTask, currentTaskId)
+        
+        if(updateTask) {
+            updateTask.taskName = title.value;
+            updateTask.des = des.value;
+            updateTask.startDate = startDate.value;
+            updateTask.startTime = startTime.value;
+            updateTask.endDate = endDate.value;
+            updateTask.endTime = endTime.value;
+            updateTask.priority = priority.value; 
+        }
+
+        localStorage.setItem('localTasks', JSON.stringify(editTask))
+        refreshBoard();
+    }
 
     
-    let addNewTask = localTasks;
-    addNewTask.push(taskObject)
-    
-    localStorage.setItem('localTasks', JSON.stringify(addNewTask))
-    refreshBoard();
 
     // reset data
     title.value = '';
